@@ -4,7 +4,7 @@ import Login from "../../components/Login";
 export default function Home() {
   return (
     <main className="border bg-main-white h-full flex ">
-      <aside className="h-full flex items-center grow-0">
+      <aside className="hidden h-full lg:flex items-center grow-0">
         <img
           src={flowersForHome}
           alt="Flowers to introduce Plants"
