@@ -8,7 +8,7 @@ function BurgerMenu() {
     <nav>
       <ul className="flex flex-col justify-evenly">
         <li>HOME</li>
-        <li>NEWS</li>
+        <li>ARTICLES</li>
         <li>OUR PLANTS</li>
 
         {/* Registers only */}

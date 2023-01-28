@@ -32,5 +32,12 @@ class ArticleManager extends AbstractManager {
       [article.title, article.content, article.user_id]
     );
   }
+
+  /* Delete an article by id */
+  delete(id) {
+    return this.connection.query(`delete from ${this.table} where id = ?`, [
+      id,
+    ]);
+  }
 }
 module.exports = ArticleManager;

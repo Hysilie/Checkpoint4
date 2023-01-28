@@ -69,7 +69,7 @@ function NavigationBar() {
       <section className="hidden lg:block py-4 border-b-2 border-main-dark">
         <ul className="flex justify-evenly">
           <li>HOME</li>
-          <li>NEWS</li>
+          <li>ARTICLES</li>
           <li>OUR PLANTS</li>
 
           {/* Registers only */}
