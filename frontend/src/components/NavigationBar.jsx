@@ -19,6 +19,7 @@ function NavigationBar() {
 
   return (
     <nav className="w-full">
+      {/* ~~ First bar ~~ */}
       <section className="flex w-full border-b-2 border-main-dark">
         {/* Menu Burger */}
         <div className="w-1/12 border-r-2 border-main-dark">
@@ -63,6 +64,22 @@ function NavigationBar() {
             className="w-3 h-3 absolute top-3 right-0"
           />
         </button>
+      </section>
+      {/* ~~ Second bar ~~ */}
+      <section className="hidden lg:block py-4 border-b-2 border-main-dark">
+        <ul className="flex justify-evenly">
+          <li>HOME</li>
+          <li>NEWS</li>
+          <li>OUR PLANTS</li>
+
+          {/* Registers only */}
+          {currentUser.username && <li>ADD PLANT</li>}
+          {currentUser.username && <li>ADD ARTICLE</li>}
+          {/* Admins only */}
+          {currentUser.admin === 1 && <li>OUR MEMBERS</li>}
+
+          <li>FOLLOW US</li>
+        </ul>
       </section>
     </nav>
   );
