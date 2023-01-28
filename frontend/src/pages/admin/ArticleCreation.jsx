@@ -41,9 +41,9 @@ function ArticleCreation() {
       <h2 className="text-center my-6 text-xl">CREATE AN ARTICLE</h2>
       <form
         onSubmit={handleSubmitArticle}
-        className="w-full h-full border flex p-[5%]"
+        className="w-full h-full  lg:flex p-[5%]"
       >
-        <article className=" relative w-1/2  border-r-2 h-4/5 border-second-dark">
+        <article className="relative lg:w-1/2  lg:border-r-2 lg:h-4/5 border-second-dark">
           {/* Title of the article */}
           <label htmlFor="title" className="font-serif text-2xl w-20 px-3">
             Title
@@ -64,17 +64,17 @@ function ArticleCreation() {
           </p>
         </article>
         {/* Content of the article */}
-        <aside className="w-1/2 px-6 my-6">
+        <aside className="lg:w-1/2 px-6 my-6 h-96">
           <ReactQuill
             theme="snow"
             value={articleContentQuill}
             onChange={setArticleContentQuill}
             modules={quillConfig.modules}
-            className="h-96"
+            className=" h-60 lg:h-96"
           />
         </aside>
         {/* Buttons */}
-        <div className="absolute bottom-60 flex w-1/2  gap-10 px-3">
+        <div className="lg:absolute lg:bottom-60 flex w-full lg:w-1/2 justify-center  lg:justify-start gap-10 px-3">
           <button
             type="button"
             className=" text-sm h-12 shadow-md text-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300"
