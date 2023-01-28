@@ -68,20 +68,24 @@ function NavigationBar() {
       {/* ~~ Second bar ~~ */}
       <section className="hidden lg:block py-4 border-b-2 border-main-dark">
         <ul className="flex justify-evenly">
-          <li>HOME</li>
-          <li>ARTICLES</li>
+          <li>
+            {" "}
+            <Link to="/"> HOME</Link>
+          </li>
+          <li>
+            <Link to="/articles">ARTICLES</Link>
+          </li>
           <li>OUR PLANTS</li>
 
           {/* Registers only */}
           {currentUser.username && <li>ADD PLANT</li>}
-          {currentUser.username && (
+
+          {/* Admins only */}
+          {currentUser.admin === 1 && <li>OUR MEMBERS</li> && (
             <li>
-              {" "}
               <Link to="/create-article">ADD ARTICLE</Link>
             </li>
           )}
-          {/* Admins only */}
-          {currentUser.admin === 1 && <li>OUR MEMBERS</li>}
 
           <li>FOLLOW US</li>
         </ul>

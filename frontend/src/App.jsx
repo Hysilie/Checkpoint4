@@ -1,14 +1,18 @@
 import { Routes, Route, useLocation } from "react-router-dom";
+
 import "./index.css";
 import ArticleCreation from "@pages/admin/ArticleCreation";
 import NavigationBar from "@components/NavigationBar";
 import Login from "@components/Login";
 import Register from "@components/Register";
 import flowersForHome from "@assets/others/flowersForhome.svg";
+import ArticlesPages from "@pages/users/ArticlesPages";
 import Home from "./pages/users/Home";
+import { useCurrentUserContext } from "./contexts/userContext";
 
 function App() {
   const location = useLocation();
+  const { currentUser } = useCurrentUserContext();
 
   return (
     <div>
@@ -41,7 +45,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" />
         <Route path="/register" />
-        <Route path="/create-article" element={<ArticleCreation />} />
+        <Route path="/articles" element={<ArticlesPages />} />
+
+        {/* ~~ Registers routes ~~ */}
+        {/* ~~ Admin routes ~~ */}
+        {currentUser.admin === 1 && (
+          <Route path="/create-article" element={<ArticleCreation />} />
+        )}
       </Routes>
     </div>
   );

@@ -16,39 +16,29 @@ function ArticleCreation() {
   const { currentUser, token } = useCurrentUserContext();
   const { allArticles, setAllArticles } = useCurrentArticleContext();
 
-  /* Get Quill module content */
+  /* Get the article content for the post */
+  const userID = currentUser.id;
+  const [articleTitle, setArticleTitle] = useState("");
+  const handleArticleTitle = (e) => {
+    setArticleTitle(e.target.value);
+  };
   const [articleContentQuill, setArticleContentQuill] = useState("");
 
-  /* Get the article content for the post */
-  const [articleContent, setArticleContent] = useState({
-    user_id: currentUser.id,
-    title: "",
-    content: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setArticleContent({
-      ...articleContent,
-      [name]: value,
-    });
-  };
-
   /* Create the article */
-  const handleSubmitArticle = (e) => {
+  const handleSubmitArticle = async (e) => {
     e.preventDefault();
-    setArticleContent({
-      ...articleContent,
+
+    const body = JSON.stringify({
+      title: articleTitle,
       content: articleContentQuill,
+      user_id: userID,
     });
 
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("Content-Type", "application/json");
-    const body = JSON.stringify(articleContent);
 
-    fetch(`${VITE_BACKEND_URL}/create-article`, {
+    await fetch(`${VITE_BACKEND_URL}/create-article`, {
       method: "POST",
       redirect: "follow",
       body,
@@ -56,7 +46,11 @@ function ArticleCreation() {
     })
       .then((response) => {
         console.warn(response);
-        setAllArticles(...allArticles, articleContent);
+        setAllArticles(...allArticles, {
+          title: articleTitle,
+          content: articleContentQuill,
+          user_id: userID,
+        });
         setTimeout(() => {
           navigate("/");
         }, 2000);
@@ -78,7 +72,7 @@ function ArticleCreation() {
             Title
           </label>
           <input
-            onChange={handleInputChange}
+            onChange={handleArticleTitle}
             name="title"
             maxLength={80}
             id="title"
