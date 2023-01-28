@@ -15,6 +15,7 @@ const {
 } = require("./services/auth");
 const authentificationControllers = require("./controllers/authControllers");
 const userControllers = require("./controllers/userControllers");
+const articleControllers = require("./controllers/articleControllers");
 
 /* ~~ PUBLIC ROUTES  ~~ */
 /* Register and Login */
@@ -26,6 +27,11 @@ router.post(
   verifyPassword
 );
 
+/* Articles Management */
+router.get("/articles", articleControllers.browse);
+router.get("/articles/:id", articleControllers.read);
+router.get("/articles/user/:id", articleControllers.getByUserId);
+
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */
 router.use(verifyToken);
@@ -35,5 +41,8 @@ router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);
 router.put("/users/:id", userControllers.edit);
 router.delete("/users/:id", userControllers.destroy);
+
+/* Articles Management */
+router.post("/create-article", articleControllers.add);
 
 module.exports = router;

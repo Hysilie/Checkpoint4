@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import { useCurrentUserContext } from "../../contexts/userContext";
+import { useCurrentArticleContext } from "../../contexts/articleContext";
 import quillConfig from "../../config/quillConfig";
+import flowers from "../../assets/others/flowers.svg";
+
+const { VITE_BACKEND_URL } = import.meta.env;
 
 function ArticleCreation() {
-  const { currentUser } = useCurrentUserContext();
+  const navigate = useNavigate();
+  const { currentUser, token } = useCurrentUserContext();
+  const { allArticles, setAllArticles } = useCurrentArticleContext();
+
   /* Get Quill module content */
   const [articleContentQuill, setArticleContentQuill] = useState("");
 
@@ -27,12 +35,33 @@ function ArticleCreation() {
     });
   };
 
+  /* Create the article */
   const handleSubmitArticle = (e) => {
     e.preventDefault();
     setArticleContent({
       ...articleContent,
       content: articleContentQuill,
     });
+
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
+    const body = JSON.stringify(articleContent);
+
+    fetch(`${VITE_BACKEND_URL}/create-article`, {
+      method: "POST",
+      redirect: "follow",
+      body,
+      headers: myHeaders,
+    })
+      .then((response) => {
+        console.warn(response);
+        setAllArticles(...allArticles, articleContent);
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
+      })
+      .catch((error) => console.warn("error", error));
   };
 
   return (
@@ -62,6 +91,11 @@ function ArticleCreation() {
             by {currentUser.username}, the{" "}
             {Date().slice(0, 10).split("-").reverse().join("/")}
           </p>
+          <img
+            src={flowers}
+            alt="flowers"
+            className="hidden lg:block lg:absolute lg:top-[-25vh] lg:left-[-10vh] lg:z-[-10] lg:w-full lg:opacity-60 lg:-rotate-90 "
+          />
         </article>
         {/* Content of the article */}
         <aside className="lg:w-1/2 px-6 my-6 h-96">
