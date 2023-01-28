@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         "main-white": "#eee",
         "main-dark": "#333",
+        "second-dark": "#33333397",
       },
       fontFamily: {
         serif: "Gupter",

@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-
 import "./index.css";
 import ArticleCreation from "@pages/admin/ArticleCreation";
 import NavigationBar from "@components/NavigationBar";
