@@ -45,5 +45,6 @@ router.delete("/users/:id", userControllers.destroy);
 /* Articles Management */
 router.post("/create-article", articleControllers.add);
 router.delete("/articles/:id", articleControllers.destroy);
+router.put("/articles/:id", articleControllers.edit);
 
 module.exports = router;

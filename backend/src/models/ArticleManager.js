@@ -39,5 +39,13 @@ class ArticleManager extends AbstractManager {
       id,
     ]);
   }
+
+  /* Update the article */
+  update(article) {
+    return this.connection.query(
+      `update ${this.table} set title = ?, content = ?  where id = ?`,
+      [article.title, article.content, article.id]
+    );
+  }
 }
 module.exports = ArticleManager;

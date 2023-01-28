@@ -76,10 +76,31 @@ const destroy = (req, res) => {
     });
 };
 
+/* Update the article */
+const edit = (req, res) => {
+  const article = req.body;
+
+  article.id = parseInt(req.params.id, 10);
+
+  models.article
+    .update(article)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 module.exports = {
   browse,
   read,
   getByUserId,
   add,
   destroy,
+  edit,
 };
