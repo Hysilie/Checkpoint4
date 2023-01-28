@@ -55,7 +55,7 @@ function NavigationBar() {
         <button
           type="button"
           onClick={currentUser.username ? logOut : () => navigate("/register")}
-          className="hidden  relative w-1/12 lg:flex text-main-white bg-main-dark px-6 font-sans items-center text-lg"
+          className="hidden  relative w-fit lg:flex text-main-white bg-main-dark px-6 font-sans items-center text-lg"
         >
           {currentUser.username ? "DISCONNECT" : "REGISTER"}
           <img
@@ -74,7 +74,12 @@ function NavigationBar() {
 
           {/* Registers only */}
           {currentUser.username && <li>ADD PLANT</li>}
-          {currentUser.username && <li>ADD ARTICLE</li>}
+          {currentUser.username && (
+            <li>
+              {" "}
+              <Link to="/create-article">ADD ARTICLE</Link>
+            </li>
+          )}
           {/* Admins only */}
           {currentUser.admin === 1 && <li>OUR MEMBERS</li>}
 
