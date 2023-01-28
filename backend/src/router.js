@@ -1,8 +1,7 @@
 const express = require("express");
 
 /* Multer is used to manage images uploads */
-//const multer = require("multer");
-
+// const multer = require("multer");
 // const upload = multer({ dest: "public/uploads/" });
 
 const router = express.Router();
