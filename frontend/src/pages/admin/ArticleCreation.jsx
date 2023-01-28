@@ -31,7 +31,7 @@ function ArticleCreation() {
     e.preventDefault();
     setArticleContent({
       ...articleContent,
-      content: { articleContentQuill },
+      content: articleContentQuill,
     });
   };
 
