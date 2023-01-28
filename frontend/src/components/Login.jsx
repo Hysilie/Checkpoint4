@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
 import flowers from "../assets/others/flowers.svg";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function Login() {
+  const navigate = useNavigate();
   const { setCurrentUser, setToken } = useCurrentUserContext();
 
   /* Get the user informations to send to the body of the fetch */
@@ -40,6 +42,7 @@ function Login() {
         if (result.token) {
           setCurrentUser(result.user);
           setToken(result.token);
+          navigate("/");
         }
       })
       .catch((error) => console.warn(error));
@@ -67,6 +70,7 @@ function Login() {
         onSubmit={handleSubmitLogin}
         className="flex flex-col w-full m-8 p-8 gap-10"
       >
+        {/* Username */}
         <article className="flex gap-6 py-8">
           <label htmlFor="username" className="text-2xl w-20">
             Username
@@ -75,11 +79,13 @@ function Login() {
             onChange={handleInputChange}
             name="username"
             id="username"
+            placeholder="Dark-Belladone"
             type="text"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"
           />
         </article>
+        {/* Password */}
         <article className="flex gap-6 mb-8">
           <label htmlFor="password" className="text-2xl w-20">
             Password
@@ -89,6 +95,7 @@ function Login() {
             name="password"
             id="password"
             type="password"
+            placeholder="********"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"
           />

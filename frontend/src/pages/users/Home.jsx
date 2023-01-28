@@ -1,3 +1,4 @@
+import Register from "@components/Register";
 import flowersForHome from "../../assets/others/flowersForhome.svg";
 import Login from "../../components/Login";
 
@@ -12,7 +13,9 @@ export default function Home() {
         />
         <div className="border-r-2  border-main-dark opacity-60 h-4/5" />
       </aside>
-      <Login />
+      {/* eslint no-restricted-globals: ["error", "event"] */}
+      {location.pathname === "/login" && <Login />}
+      {location.pathname === "/register" && <Register />}
     </main>
   );
 }

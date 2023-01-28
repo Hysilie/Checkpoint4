@@ -1,14 +1,18 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CurrentUserProvider } from "./contexts/userContext";
 import Home from "./pages/users/Home";
 import "./index.css";
-import { CurrentUserProvider } from "./contexts/userContext";
 
 function App() {
   return (
-    <CurrentUserProvider>
-      <div className="h-screen text-main-dark">
-        <Home />
-      </div>{" "}
-    </CurrentUserProvider>
+    <Router>
+      <CurrentUserProvider>
+        <Routes>
+          <Route path="/login" element={<Home />} />
+          <Route path="/register" element={<Home />} />
+        </Routes>
+      </CurrentUserProvider>
+    </Router>
   );
 }
 
