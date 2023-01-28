@@ -7,6 +7,10 @@ module.exports = {
         "main-white": "#eee",
         "main-dark": "#333",
       },
+      fontFamily: {
+        serif: "Gupter",
+        sans: "Hind Vadorara",
+      },
     },
   },
   plugins: [],
