@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
 import flowers from "../assets/others/flowers.svg";
 
@@ -49,7 +49,7 @@ function Login() {
   };
 
   return (
-    <section className=" relative z-[2] font-serif flex flex-col grow border m-6 items-center justify-center  ">
+    <section className=" relative z-[2] font-serif flex flex-col grow  m-6 items-center justify-center  ">
       {/* Hidden for medium screen */}
       <div className=" lg:hidden m-6 font-bold">
         <img
@@ -63,7 +63,10 @@ function Login() {
       {/* Global screens */}
       <h2 className="text-4xl"> Register</h2>
       <h3 className="text-lg">
-        or <span className="underline">create an account</span>
+        or{" "}
+        <span className="underline">
+          <Link to="/register">create an account</Link>
+        </span>
       </h3>
 
       <form
@@ -110,6 +113,9 @@ function Login() {
           </button>
         </div>
       </form>
+      <h3 className="underline">
+        <Link to="/">or continue without login</Link>
+      </h3>
     </section>
   );
 }

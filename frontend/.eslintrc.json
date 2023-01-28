@@ -17,6 +17,8 @@
   },
   "plugins": ["react", "import"],
   "rules": {
+    /* for the use of location.pathname */
+    "no-restricted-globals": ["error", "event", "fdescribe"],
     "no-console": "off",
     "no-restricted-syntax": [
       "error",

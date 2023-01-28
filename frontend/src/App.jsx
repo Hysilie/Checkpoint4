@@ -8,6 +8,7 @@ function App() {
     <Router>
       <CurrentUserProvider>
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/login" element={<Home />} />
           <Route path="/register" element={<Home />} />
         </Routes>

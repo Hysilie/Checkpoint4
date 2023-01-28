@@ -9,7 +9,7 @@ module.exports = {
       },
       fontFamily: {
         serif: "Gupter",
-        sans: "Hind Vadorara",
+        sans: "Hind Vadodara",
       },
     },
   },
