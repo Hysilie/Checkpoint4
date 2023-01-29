@@ -43,8 +43,7 @@ function BurgerMenu({ open, setOpen }) {
         {/* Admins only */}
         {currentUser.admin === 1 && (
           <li>
-            OUR MEMBERS
-            <hr />
+            <Link to="/users-management">MEMBERS</Link> <hr />
           </li>
         )}
 

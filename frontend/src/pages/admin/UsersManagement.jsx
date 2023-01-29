@@ -3,6 +3,7 @@ import PreviousBtn from "@components/PreviousBtn";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import trash from "../../assets/icons/trash.svg";
 import DeleteModaleUser from "../../components/DeleteModaleUser";
+import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -120,8 +121,8 @@ function UsersManagement() {
                         <div className="flex items-center">
                           <div className="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
                             <img
-                              className="rounded-full"
-                              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQp8HE9nJ03LBSlHivqF46xHQ640tNgo-9nnFrUMANrL3tf4lOHdDeNzjLZurWNUf3oIt8&usqp=CAU"
+                              className="rounded-full grayscale"
+                              src={profilePictureEmpty}
                               width="40"
                               height="40"
                               alt=""

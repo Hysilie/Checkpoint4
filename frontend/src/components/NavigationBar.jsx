@@ -125,10 +125,17 @@ function NavigationBar() {
           )}
 
           {/* Admins only */}
-          {currentUser.admin === 1 && <li>OUR MEMBERS</li> && (
-            <li className="hover:scale-110 duration-150">
-              <Link to="/create-article">ADD ARTICLE</Link>
-            </li>
+          {currentUser.admin === 1 && (
+            <>
+              {" "}
+              <li className="hover:scale-110 duration-150">
+                {" "}
+                <Link to="/users-management">MEMBERS</Link>
+              </li>
+              <li className="hover:scale-110 duration-150">
+                <Link to="/create-article">ADD ARTICLE</Link>
+              </li>
+            </>
           )}
 
           <li className="hover:scale-110 duration-150">FOLLOW US</li>
