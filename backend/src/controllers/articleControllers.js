@@ -13,6 +13,19 @@ const browse = (req, res) => {
     });
 };
 
+/* Get three last articles */
+const latestArticles = (req, res) => {
+  models.article
+    .findLatestArticles()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 /* Get an article by his id */
 const read = (req, res) => {
   models.article
@@ -98,6 +111,7 @@ const edit = (req, res) => {
 };
 module.exports = {
   browse,
+  latestArticles,
   read,
   getByUserId,
   add,

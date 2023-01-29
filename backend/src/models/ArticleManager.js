@@ -15,10 +15,25 @@ class ArticleManager extends AbstractManager {
     );
   }
 
+  /* Find last articles for the home page */
+
+  findLatestArticles() {
+    return this.connection.query(
+      `SELECT ${this.table}.* , username
+    FROM ${this.table}
+    LEFT JOIN user ON user_id = user.id
+    ORDER by creationDate desc
+    LIMIT 3;`
+    );
+  }
+
   /* Find article by id */
   find(id) {
     return this.connection.query(
-      `select ${this.table}*, user.username from  ${this.table}  left join on user_id = user.id where id = ?`,
+      `SELECT ${this.table}.* , user.username 
+      FROM  ${this.table} 
+      LEFT JOIN user ON user_id = user.id 
+      WHERE article.id = ?`,
       [id]
     );
   }

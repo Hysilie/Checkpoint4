@@ -31,6 +31,7 @@ router.post(
 router.get("/articles", articleControllers.browse);
 router.get("/articles/:id", articleControllers.read);
 router.get("/articles/user/:id", articleControllers.getByUserId);
+router.get("/articles-latest", articleControllers.latestArticles);
 
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */

@@ -7,6 +7,7 @@ import Login from "@components/Login";
 import Register from "@components/Register";
 import flowersForHome from "@assets/others/flowersForhome.svg";
 import ArticlesPages from "@pages/users/ArticlesPages";
+import Article from "@pages/users/Article";
 import Home from "./pages/users/Home";
 import { useCurrentUserContext } from "./contexts/userContext";
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/login" />
         <Route path="/register" />
         <Route path="/articles" element={<ArticlesPages />} />
+        <Route path="/articles/:id" element={<Article />} />
 
         {/* ~~ Registers routes ~~ */}
         {/* ~~ Admin routes ~~ */}

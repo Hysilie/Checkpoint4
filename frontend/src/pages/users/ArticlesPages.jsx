@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
 import { useCurrentArticleContext } from "../../contexts/articleContext";
 
@@ -62,9 +62,11 @@ function ArticlesPages() {
                 className="flex justify-between hover:scale-105 duration-300 hover:text-[#404040] h-full"
               >
                 <div className="border-b-[1px] border-[#797979] w-full">
-                  <h3 className="font-semibold text-md lg:text-xl   w-72 lg:w-96">
-                    {article.title.toUpperCase()}
-                  </h3>
+                  <Link to={`/articles/${article.id}`}>
+                    <h3 className="font-semibold text-md lg:text-xl   w-72 lg:w-96">
+                      {article.title.toUpperCase()}
+                    </h3>
+                  </Link>
                   <p>
                     by {article.username}, the{"  "}
                     {article.creationDate
@@ -76,7 +78,7 @@ function ArticlesPages() {
                 </div>
                 <button
                   type="button"
-                  onClick={() => navigate(`/article/${article.id}`)}
+                  onClick={() => navigate(`/articles/${article.id}`)}
                   className=" text-sm font-semibold h-12 shadow-md text-center border-[1px] rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300"
                 >
                   Read
