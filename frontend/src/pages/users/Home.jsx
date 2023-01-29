@@ -60,7 +60,7 @@ export default function Home() {
             ))}
           </ul>
         </section>
-        <div className="flex justify-center mx-auto border-b-[2px] border-main-dark w-11/12" />
+        <div className="flex justify-center mx-auto border-b-[1px] lg:border-b-[2px] border-main-dark w-11/12" />
         {/* Plants section */}
       </main>
     )

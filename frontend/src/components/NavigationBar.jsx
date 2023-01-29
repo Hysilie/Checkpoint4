@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
 import menuBurger from "../assets/icons/FrameburgerMenu.svg";
+import closeMenuBurger from "../assets/icons/FramecloseMenu.svg";
 import loginIcon from "../assets/icons/Framelogin.svg";
 import registerLinkArrow from "../assets/icons/FramearrowRightCorner.svg";
+import BurgerMenu from "./BurgerMenu";
 
 function NavigationBar() {
+  const [open, setOpen] = useState(false);
   const { currentUser, setCurrentUser } = useCurrentUserContext();
 
   const navigate = useNavigate();
+
+  /* To log out */
   const logOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
@@ -17,16 +22,49 @@ function NavigationBar() {
     navigate("/");
   };
 
+  /*  Close menu when click outside  */
+  const concernedElement = document.getElementById("click-menu");
+  document.addEventListener("mousedown", (event) => {
+    if (concernedElement === null) {
+      return;
+    }
+    if (
+      !concernedElement.contains(event.target) &&
+      event.target.id !== "menu-burger" &&
+      event.target.id !== "menu-burger1" &&
+      event.target.id !== "menu-burger2"
+    ) {
+      setOpen(false);
+    }
+  });
+
   return (
     <nav className="w-full">
       {/* ~~ First bar ~~ */}
-      <section className="flex w-full border-b-2 border-main-dark">
+      <section className=" flex w-full border-b-2 border-main-dark">
         {/* Menu Burger */}
-        <div className="w-1/12 border-r-2 border-main-dark">
-          <button type="button">
-            <img src={menuBurger} alt="Menu burger button" />
+        <div className=" relative w-1/12 border-r-2 flex justify-center border-main-dark">
+          <button type="button" onClick={() => setOpen(!open)} id="menu-burger">
+            {open ? (
+              <img
+                id="menu-burger1"
+                src={closeMenuBurger}
+                alt="Menu burger button to close"
+              />
+            ) : (
+              <img
+                id="menu-burger2"
+                src={menuBurger}
+                alt="Menu burger button to open"
+              />
+            )}
           </button>
+          <div className="absolute z-40 top-[5.8vh] left-0" id="click-menu">
+            {/* Open the menu burger */}
+            {open ? <BurgerMenu open={open} setOpen={setOpen} /> : ""}
+          </div>
         </div>
+
         {/* Title */}
         <div className="w-10/12 lg:w-8/12 flex justify-center items-center">
           <h1 className="text-4xl font-serif text-center  ">
