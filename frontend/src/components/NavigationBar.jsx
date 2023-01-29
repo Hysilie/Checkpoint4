@@ -106,26 +106,32 @@ function NavigationBar() {
       {/* ~~ Second bar ~~ */}
       <section className="hidden lg:block py-4 border-b-2 border-main-dark">
         <ul className="flex justify-evenly">
-          <li>
+          <li className="hover:scale-110 duration-150">
             {" "}
             <Link to="/"> HOME</Link>
           </li>
-          <li>
+          <li className="hover:scale-110 duration-150">
             <Link to="/articles">ARTICLES</Link>
           </li>
-          <li>OUR PLANTS</li>
+          <li className="hover:scale-110 duration-150">
+            <Link to="/plants">PLANTS</Link>
+          </li>
 
           {/* Registers only */}
-          {currentUser.username && <li>ADD PLANT</li>}
+          {currentUser.username && (
+            <li className="hover:scale-110 duration-150">
+              <Link to="/create-plant">ADD PLANT</Link>
+            </li>
+          )}
 
           {/* Admins only */}
           {currentUser.admin === 1 && <li>OUR MEMBERS</li> && (
-            <li>
+            <li className="hover:scale-110 duration-150">
               <Link to="/create-article">ADD ARTICLE</Link>
             </li>
           )}
 
-          <li>FOLLOW US</li>
+          <li className="hover:scale-110 duration-150">FOLLOW US</li>
         </ul>
       </section>
     </nav>

@@ -24,16 +24,16 @@ function BurgerMenu({ open, setOpen }) {
         </li>
 
         <li className="hover:scale-110 duration-150">
-          OUR PLANTS <hr />
+          <Link to="/plants">PLANTS</Link> <hr />
         </li>
 
         {/* Registers only */}
         {currentUser.username && (
           <li>
-            ADD PLANT <hr />
+            <Link to="/create-plant">ADD PLANT</Link> <hr />
           </li>
         )}
-        {currentUser.username && (
+        {currentUser.admin === 1 && (
           <li className="hover:scale-110 duration-150">
             <Link to="/create-article">ADD ARTICLE</Link>
             <hr />

@@ -59,6 +59,19 @@ const getPlantsbyUser = (req, res) => {
     });
 };
 
+/* Get latest 3 plants */
+const latestPlants = (req, res) => {
+  models.plant
+    .findLatestPlants()
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 /* Destroy a plant by his id */
 const destroy = (req, res) => {
   models.plant
@@ -103,4 +116,5 @@ module.exports = {
   getPlantsbyUser,
   destroy,
   updatePicture,
+  latestPlants,
 };

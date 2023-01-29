@@ -7,7 +7,9 @@ class PlantManager extends AbstractManager {
 
   /* Find all plants */
   findAll() {
-    return this.connection.query(`select * from  ${this.table}`);
+    return this.connection.query(
+      `select ${this.table}.*, username from  ${this.table} inner join user on user.id = ${this.table}.user_id`
+    );
   }
 
   /* Find plant by his id */
@@ -22,6 +24,17 @@ class PlantManager extends AbstractManager {
     return this.connection.query(
       `select * from  ${this.table} where user_id = ?`,
       [userId]
+    );
+  }
+
+  /* Find by latest add */
+  findLatestPlants() {
+    return this.connection.query(
+      `SELECT ${this.table}.* , username
+    FROM ${this.table}
+    LEFT JOIN user ON user_id = user.id
+    ORDER by creationDate desc
+    LIMIT 4;`
     );
   }
 

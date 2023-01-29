@@ -8,6 +8,9 @@ import Register from "@components/Register";
 import flowersForHome from "@assets/others/flowersForhome.svg";
 import ArticlesPages from "@pages/users/ArticlesPages";
 import Article from "@pages/users/Article";
+import PlantCreation from "@pages/users/PlantCreation";
+/* import Plant from "@pages/Plant";
+ */ import PlantsPages from "@pages/users/PlantsPages";
 import Home from "./pages/users/Home";
 import { useCurrentUserContext } from "./contexts/userContext";
 
@@ -47,9 +50,16 @@ function App() {
         <Route path="/login" />
         <Route path="/register" />
         <Route path="/articles" element={<ArticlesPages />} />
-        <Route path="/articles/:id" element={<Article />} />
+        <Route path="/plants" element={<PlantsPages />} />
 
         {/* ~~ Registers routes ~~ */}
+        {currentUser.username && (
+          <>
+            <Route path="/create-plant" element={<PlantCreation />} />
+            <Route path="/articles/:id" element={<Article />} />
+            {/*   <Route path="/plants/:id" element={<Plant />} /> */}
+          </>
+        )}
         {/* ~~ Admin routes ~~ */}
         {currentUser.admin === 1 && (
           <Route path="/create-article" element={<ArticleCreation />} />

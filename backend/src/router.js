@@ -39,6 +39,9 @@ router.get("/articles-latest", articleControllers.latestArticles);
 router.get("/plants", plantControllers.browse);
 router.get("/plants/:id", plantControllers.read);
 router.get("/plants/user/:id", plantControllers.getPlantsbyUser);
+router.get("/plants-latest", plantControllers.latestPlants);
+/* Pictures of Plants */
+router.get("/pictures/:fileName", fileControllers.upload);
 
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */
@@ -66,7 +69,5 @@ router.post(
   fileControllers.rename,
   plantControllers.updatePicture
 );
-
-router.get("/pictures/:fileName", fileControllers.upload);
 
 module.exports = router;
