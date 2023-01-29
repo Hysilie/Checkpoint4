@@ -83,10 +83,27 @@ const destroy = (req, res) => {
     });
 };
 
+const updateAvatar = (req, res) => {
+  const id = req.payload.sub;
+  const { picture } = req;
+
+  models.user
+    .updateAvatar(id, picture)
+    .then(([result]) => {
+      if (result.affectedRows === 0) res.sendStatus(404);
+      else res.send({ picture }).status(204);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   browse,
   read,
   add,
   edit,
   destroy,
+  updateAvatar,
 };
