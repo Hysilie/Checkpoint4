@@ -14,9 +14,10 @@ class PlantManager extends AbstractManager {
 
   /* Find plant by his id */
   find(id) {
-    return this.connection.query(`select * from  ${this.table} where id = ?`, [
-      id,
-    ]);
+    return this.connection.query(
+      `select ${this.table}.*, username from ${this.table} inner join user on user.id = ${this.table}.user_id  where ${this.table}.id = ?`,
+      [id]
+    );
   }
 
   /* Find all plant by user */

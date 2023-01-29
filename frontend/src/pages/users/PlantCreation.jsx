@@ -47,18 +47,11 @@ function PlantCreation() {
     }
   };
 
-  const handleSubmitArticle = async (e) => {
-    e.preventDefault();
-  };
-
   return (
     <section className="h-[80vh]">
       <PreviousBtn />
       <h2 className="text-center my-6 text-xl">POST A PLANT</h2>
-      <form
-        onSubmit={handleSubmitArticle}
-        className="w-full h-full  lg:flex p-[5%]"
-      >
+      <div className="w-full h-full  lg:flex p-[5%]">
         <article className="relative lg:w-1/2  lg:border-r-2 lg:h-4/5 border-second-dark">
           {/* Title of the article */}
           <label htmlFor="title" className="font-serif text-2xl w-20 px-3">
@@ -106,16 +99,7 @@ function PlantCreation() {
             className="  grayscale w-fit lg:w-3/6 h-96 lg:h-fit border-[1px] border-second-dark shadow-md "
           />
         </aside>
-        {/* Buttons */}
-        {/*   <div className="lg:absolute lg:bottom-60 flex w-full lg:w-1/2 justify-center  lg:justify-start gap-10 px-3">
-          <button
-            type="submit"
-            className=" text-sm font-semibold h-12 shadow-md text-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300"
-          >
-            PUBLISH
-          </button>
-        </div> */}
-      </form>
+      </div>
     </section>
   );
 }

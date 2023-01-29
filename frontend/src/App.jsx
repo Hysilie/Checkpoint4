@@ -9,8 +9,8 @@ import flowersForHome from "@assets/others/flowersForhome.svg";
 import ArticlesPages from "@pages/users/ArticlesPages";
 import Article from "@pages/users/Article";
 import PlantCreation from "@pages/users/PlantCreation";
-/* import Plant from "@pages/Plant";
- */ import PlantsPages from "@pages/users/PlantsPages";
+import Plant from "@pages/users/Plant";
+import PlantsPages from "@pages/users/PlantsPages";
 import Home from "./pages/users/Home";
 import { useCurrentUserContext } from "./contexts/userContext";
 
@@ -57,7 +57,7 @@ function App() {
           <>
             <Route path="/create-plant" element={<PlantCreation />} />
             <Route path="/articles/:id" element={<Article />} />
-            {/*   <Route path="/plants/:id" element={<Plant />} /> */}
+            <Route path="/plants/:id" element={<Plant />} />
           </>
         )}
         {/* ~~ Admin routes ~~ */}

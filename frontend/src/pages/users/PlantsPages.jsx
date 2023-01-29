@@ -28,7 +28,7 @@ function PlantsPages() {
                   className="h-48 w-60 object-cover"
                 />{" "}
                 <h3 className="font-semibold text-md   w-100 lg:w-72 flex  pr-8">
-                  {plant.title?.toUpperCase().slice(0, 26).replace(/.$/, "...")}
+                  {plant.title?.toUpperCase().slice(0, 25).replace(/.$/, "...")}
                 </h3>
                 <p>
                   by {plant.username}, the{"  "}
