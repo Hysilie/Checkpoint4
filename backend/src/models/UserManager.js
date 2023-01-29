@@ -7,7 +7,7 @@ class UserManager extends AbstractManager {
 
   find(id) {
     return this.connection.query(
-      `select id, firstname, username, email, admin, registrationDate from  ${this.table} where id = ?`,
+      `select id, firstname, username, email, admin, registrationDate, profilePicture from  ${this.table} where id = ?`,
       [id]
     );
   }
@@ -23,7 +23,7 @@ class UserManager extends AbstractManager {
   /* Manage to find users */
   findAll() {
     return this.connection.query(
-      `select id, firstname, username, email, admin, registrationDate from  ${this.table}`
+      `select id, firstname, username, email, admin, registrationDate, profilePicture from  ${this.table}`
     );
   }
 
@@ -38,8 +38,8 @@ class UserManager extends AbstractManager {
   /* Manage to update user */
   update(user) {
     return this.connection.query(
-      `update ${this.table} set firstname = ?, username = ?  where id = ?`,
-      [user.firstname, user.username, user.id]
+      `update ${this.table} set  firstname = ?  where id = ?`,
+      [user.firstname, user.id]
     );
   }
 
@@ -48,6 +48,14 @@ class UserManager extends AbstractManager {
     return this.connection.query(`delete from ${this.table} where id = ?`, [
       id,
     ]);
+  }
+
+  /* Manage to update picture */
+  updateAvatar(id, profilePicture) {
+    return this.connection.query(
+      `update ${this.table} set profilePicture = ? where id = ?`,
+      [profilePicture, id]
+    );
   }
 }
 

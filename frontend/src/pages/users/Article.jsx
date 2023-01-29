@@ -33,8 +33,8 @@ function Article() {
       <section className="h-[80vh]">
         <PreviousBtn />
         <h2 className="text-center my-6 text-xl">READING</h2>
-        <div className="w-full h-full items-center lg:flex pt-[15%] lg:p-[5%]">
-          <article className="relative lg:w-1/2  lg:border-r-2 lg:h-96  border-second-dark ">
+        <div className="w-full h-full justify-center lg:flex pt-[15%] lg:p-[5%]">
+          <article className="relative lg:w-1/2  lg:border-r-2 lg:h-96  lg:border-second-dark ">
             {/* Title of the article */}
             <h3 className="font-serif font-semibold text-2xl w-100 lg:w-4/6 px-3">
               {article.title?.toUpperCase()}
@@ -55,11 +55,11 @@ function Article() {
             />
           </article>
           {/* Content of the article */}
-          <aside className="lg:w-1/2 px-6 my-6 h-96 items-center">
+          <aside className="lg:w-1/2 px-6 my-6 h-96 items-center justify-center">
             <ReactQuill
               theme="bubble"
               value={article.content}
-              className=" h-100  lg:h-[60vh]"
+              className=" h-100  h-fit"
             />
           </aside>
         </div>

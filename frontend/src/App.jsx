@@ -14,6 +14,7 @@ import PlantsPages from "@pages/users/PlantsPages";
 import ArticlesManagement from "@pages/admin/ArticlesManagement";
 import UsersManagement from "@pages/admin/UsersManagement";
 import Error from "@pages/users/Error";
+import Profile from "@pages/admin/Profile";
 import Home from "./pages/users/Home";
 import { useCurrentUserContext } from "./contexts/userContext";
 
@@ -39,6 +40,8 @@ function App() {
             {location.pathname === "/login" && <Login />}
             {location.pathname === "/register" && <Register />}
           </main>
+        ) : location.pathname === "/profile" && currentUser?.username ? (
+          <Profile />
         ) : (
           <main className="border bg-main-white h-full  ">
             {/* ~~ Home Page for everyone ~~ */}
@@ -53,6 +56,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" />
         <Route path="/register" />
+
         <Route path="/articles" element={<ArticlesPages />} />
         <Route path="/plants" element={<PlantsPages />} />
 
@@ -62,6 +66,7 @@ function App() {
             <Route path="/create-plant" element={<PlantCreation />} />
             <Route path="/articles/:id" element={<Article />} />
             <Route path="/plants/:id" element={<Plant />} />
+            <Route path="/profile" />
           </>
         )}
         {/* ~~ Admin routes ~~ */}

@@ -40,8 +40,10 @@ router.get("/plants", plantControllers.browse);
 router.get("/plants/:id", plantControllers.read);
 router.get("/plants/user/:id", plantControllers.getPlantsbyUser);
 router.get("/plants-latest", plantControllers.latestPlants);
-/* Pictures of Plants */
+
+/* Pictures */
 router.get("/pictures/:fileName", fileControllers.upload);
+router.get("/avatars/:fileName", fileControllers.upload);
 
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */
@@ -68,6 +70,14 @@ router.post(
   upload.single("picture"),
   fileControllers.rename,
   plantControllers.updatePicture
+);
+
+/* User picture management  */
+router.put(
+  "/avatars",
+  upload.single("profilePicture"),
+  fileControllers.rename,
+  userControllers.updateAvatar
 );
 
 module.exports = router;

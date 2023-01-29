@@ -90,9 +90,9 @@ function ArticlesPages() {
             {pageNumbers.map((number) => (
               <button
                 type="button"
-                className={` text-xl w-8 h-8  rounded-lg ${
+                className={` text-xl w-8 h-8  rounded-md ${
                   number === currentPage
-                    ? "bg-main-dark text-white"
+                    ? "bg-main-dark text-main-white"
                     : "bg-main-white border-[1px] border-main-dark"
                 } `}
                 key={number}

@@ -88,6 +88,7 @@ CREATE TABLE `user` (
   `hashedPassword` varchar(255) NOT NULL,
   `admin` tinyint DEFAULT '0',
   `registrationDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `profilePicture` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pseudo_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
@@ -100,7 +101,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Marion','Mizu','marionmizulalonde@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',1,'2023-01-28 02:49:55'),(2,'June','June','june@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-28 02:49:55');
+INSERT INTO `user` VALUES (1,'Marion','Mizu','marionmizulalonde@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',1,'2023-01-28 02:49:55', NULL),(2,'June','June','june@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-28 02:49:55',NULL);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
