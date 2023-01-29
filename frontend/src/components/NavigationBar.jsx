@@ -55,7 +55,7 @@ function NavigationBar() {
         <button
           type="button"
           onClick={currentUser.username ? logOut : () => navigate("/register")}
-          className="hidden  relative w-fit lg:flex text-main-white bg-main-dark px-6 font-sans items-center text-lg"
+          className="hidden  relative w-1/12 lg:flex text-main-white bg-main-dark px-6 font-sans items-center text-lg"
         >
           {currentUser.username ? "DISCONNECT" : "REGISTER"}
           <img
