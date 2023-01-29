@@ -18,6 +18,7 @@ const userControllers = require("./controllers/userControllers");
 const articleControllers = require("./controllers/articleControllers");
 const plantControllers = require("./controllers/plantControllers");
 const fileControllers = require("./controllers/fileControllers");
+const favoriteControllers = require("./controllers/favoriteControllers");
 
 /* ~~ PUBLIC ROUTES  ~~ */
 /* Register and Login */
@@ -62,6 +63,9 @@ router.put("/articles/:id", articleControllers.edit);
 
 /* Plants Management */
 router.delete("/plants/:id", plantControllers.destroy);
+
+/* Favorite Management */
+router.get("/favorites/:id", favoriteControllers.favoriteByUser);
 
 /* Plants picture management */
 router.post(
