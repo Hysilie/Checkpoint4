@@ -161,12 +161,14 @@ function Profile() {
           <label htmlFor="image-upload">
             <img
               src={
-                currentUser?.profilePicture === null
+                currentUser?.profilePicture === ""
                   ? profilePictureEmpty
                   : `${VITE_BACKEND_URL}/avatars/${currentUser?.profilePicture}`
               }
               alt="userImage"
-              className="object-fit  w-36 h-36 md:w-48  md:h-48  rounded-full "
+              className={`object-fit  w-36 h-36 md:w-48  md:h-48  rounded-full ${
+                currentUser?.profilePicture === "" && "grayscale"
+              } `}
             />
           </label>
           <input
