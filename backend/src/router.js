@@ -1,8 +1,8 @@
 const express = require("express");
-
 /* Multer is used to manage images uploads */
-// const multer = require("multer");
-// const upload = multer({ dest: "public/uploads/" });
+const multer = require("multer");
+
+const upload = multer({ dest: process.env.PLANTS_DIRECTORY });
 
 const router = express.Router();
 
@@ -16,6 +16,8 @@ const {
 const authentificationControllers = require("./controllers/authControllers");
 const userControllers = require("./controllers/userControllers");
 const articleControllers = require("./controllers/articleControllers");
+const plantControllers = require("./controllers/plantControllers");
+const fileControllers = require("./controllers/fileControllers");
 
 /* ~~ PUBLIC ROUTES  ~~ */
 /* Register and Login */
@@ -33,6 +35,11 @@ router.get("/articles/:id", articleControllers.read);
 router.get("/articles/user/:id", articleControllers.getByUserId);
 router.get("/articles-latest", articleControllers.latestArticles);
 
+/* Plants Management */
+router.get("/plants", plantControllers.browse);
+router.get("/plants/:id", plantControllers.read);
+router.get("/plants/user/:id", plantControllers.getPlantsbyUser);
+
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */
 router.use(verifyToken);
@@ -47,5 +54,19 @@ router.delete("/users/:id", userControllers.destroy);
 router.post("/create-article", articleControllers.add);
 router.delete("/articles/:id", articleControllers.destroy);
 router.put("/articles/:id", articleControllers.edit);
+
+/* Plants Management */
+router.delete("/plants/:id", plantControllers.destroy);
+
+/* Plants picture management */
+router.post(
+  "/pictures",
+  verifyToken,
+  upload.single("picture"),
+  fileControllers.rename,
+  plantControllers.updatePicture
+);
+
+router.get("/pictures/:fileName", fileControllers.upload);
 
 module.exports = router;
