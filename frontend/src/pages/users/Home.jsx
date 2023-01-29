@@ -1,4 +1,5 @@
 import AnimationHome from "@components/AnimationHome";
+import Footer from "@components/Footer";
 import React, { useState, useEffect } from "react";
 import { /* useNavigate */ Link } from "react-router-dom";
 
@@ -44,7 +45,7 @@ export default function Home() {
     latestPlants && (
       <main className="h-[80vh]">
         {/* News section */}
-        <section className="m-8 mb-[4%]">
+        <section className="mx-8 mt-3 mb-8  lg:mb-[8%]">
           <h2 className=" text-xl lg:text-2xl">
             NEWS{" "}
             <span className="px-3 text-sm underline">
@@ -92,7 +93,7 @@ export default function Home() {
             </span>
           </h2>
 
-          <ul className="flex flex-col md:flex-wrap lg:justify-evenly lg:flex-row mt-6 items-center gap-6">
+          <ul className="flex flex-col p-3 md:flex-wrap lg:justify-evenly lg:flex-row mt-6 items-center gap-6">
             {latestPlants?.map((plant) => (
               <li
                 key={plant.id}
@@ -123,6 +124,7 @@ export default function Home() {
             ))}
           </ul>
         </section>
+        <Footer />
       </main>
     )
   );
