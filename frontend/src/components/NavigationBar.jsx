@@ -78,7 +78,7 @@ function NavigationBar() {
             type="button"
             onClick={
               currentUser.username
-                ? () => navigate("/")
+                ? () => navigate("/profile")
                 : () => navigate("/login")
             }
             className="flex items-center gap-2 "
