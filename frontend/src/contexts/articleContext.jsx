@@ -7,7 +7,6 @@ const CurrentArticleContext = createContext();
 
 export default CurrentArticleContext;
 
-/* We save the users informations with his token in the localstoage */
 export function CurrentArticleProvider({ children }) {
   const [allArticles, setAllArticles] = useState([]);
 

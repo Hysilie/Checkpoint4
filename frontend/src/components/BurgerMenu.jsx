@@ -2,29 +2,55 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useCurrentUserContext } from "../contexts/userContext";
 
-function BurgerMenu() {
+function BurgerMenu({ open, setOpen }) {
   const { currentUser } = useCurrentUserContext();
 
   return (
-    <nav>
-      <ul className="flex flex-col justify-evenly">
-        <li>HOME</li>
-        <li>
-          <Link to="/articles">ARTICLES</Link>
+    <nav className="bg-main-dark text-main-white w-screen lg:w-fit p-8 h-screen">
+      <ul
+        className="flex flex-col gap-8 justify-evenly"
+        onClick={() => setOpen(!open)}
+        role="presentation"
+      >
+        <li className="hover:scale-110 duration-150">
+          {" "}
+          <Link to="/">
+            HOME <hr />
+          </Link>
         </li>
-        <li>OUR PLANTS</li>
+
+        <li className="hover:scale-110 duration-150">
+          <Link to="/articles">ARTICLES</Link> <hr />
+        </li>
+
+        <li className="hover:scale-110 duration-150">
+          <Link to="/plants">PLANTS</Link> <hr />
+        </li>
 
         {/* Registers only */}
-        {currentUser.username && <li>ADD PLANT</li>}
         {currentUser.username && (
           <li>
-            <Link to="/create-article">ADD ARTICLE</Link>
+            <Link to="/create-plant">ADD PLANT</Link> <hr />
           </li>
         )}
-        {/* Admins only */}
-        {currentUser.admin === 1 && <li>OUR MEMBERS</li>}
+        {currentUser.admin === 1 && (
+          <li className="hover:scale-110 duration-150">
+            <Link to="/create-article">ADD ARTICLE</Link>
+            <hr />
+          </li>
+        )}
 
-        <li>FOLLOW US</li>
+        {/* Admins only */}
+        {currentUser.admin === 1 && (
+          <li>
+            OUR MEMBERS
+            <hr />
+          </li>
+        )}
+
+        <li className="hover:scale-110 duration-150">
+          FOLLOW US <hr />
+        </li>
       </ul>
     </nav>
   );

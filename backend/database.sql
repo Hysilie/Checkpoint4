@@ -53,9 +53,9 @@ DROP TABLE IF EXISTS `plant`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `plant` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
+  `title` nvarchar(255) NOT NULL,
   `picture` varchar(255) NOT NULL,
-  `creationDate` date DEFAULT NULL,
+  `creationDate` datetime DEFAULT CURRENT_TIMESTAMP,
   `user_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_plant_userid_idx` (`user_id`),
@@ -69,7 +69,7 @@ CREATE TABLE `plant` (
 
 LOCK TABLES `plant` WRITE;
 /*!40000 ALTER TABLE `plant` DISABLE KEYS */;
-INSERT INTO `plant` VALUES (1,'Calathea','Calathea',NULL,1),(2,'Pilea','Pilea',NULL,NULL);
+INSERT INTO `plant` VALUES (11,'Green love 🌿 Thank you, Mom, for your gardening tips !','d084bfea-7276-4266-aaea-99df28cd6c32-calathea.jpeg','2023-01-29 09:16:31',1),(12,'Green wedding 🎉 #weddinggoals','1b2506c1-6838-4f67-89ea-1eb878398a71-philodendronpinkprincess.jpeg','2023-01-29 09:17:49',2),(13,'Celebrating plant life 🌻  ','629669f0-783d-4d65-b6c5-deed51e8ae59-pothos.jpeg','2023-01-29 09:18:34',1),(14,'Celebrating growth and new beginnings.','4c4daace-efee-489e-a4e1-fcff1dd705db-plantUpload.jpg','2023-01-29 09:22:20',2),(15,'Where flowers and friendships bloom.','bbefcd88-6b10-4769-9a04-620976ad4003-flowers.jpg','2023-01-29 09:22:47',1),(16,'The garden is my medicine 🍃 #mindfulgardening','0f9dd0e9-dce9-40ff-a403-1550c2a73d05-zamioculas.jpeg','2023-01-29 09:23:22',2),(17,'Plants are beautiful ','ea614b43-cb7c-4d2c-8e16-2c7a5ec87207-syngoniumpink.jpeg','2023-01-29 09:23:56',1),(18,'Back to nature 🌲 #weekendvibes','835fdc21-d686-416f-a7c2-4a261ab61f88-forest.jpg','2023-01-29 09:24:59',2);
 /*!40000 ALTER TABLE `plant` ENABLE KEYS */;
 UNLOCK TABLES;
 
