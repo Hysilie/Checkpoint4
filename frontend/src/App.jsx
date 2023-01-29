@@ -11,6 +11,9 @@ import Article from "@pages/users/Article";
 import PlantCreation from "@pages/users/PlantCreation";
 import Plant from "@pages/users/Plant";
 import PlantsPages from "@pages/users/PlantsPages";
+import ArticlesManagement from "@pages/admin/ArticlesManagement";
+import UsersManagement from "@pages/admin/UsersManagement";
+import Error from "@pages/users/Error";
 import Home from "./pages/users/Home";
 import { useCurrentUserContext } from "./contexts/userContext";
 
@@ -46,6 +49,7 @@ function App() {
 
       {/* ~~ Routes ~~ */}
       <Routes>
+        <Route path="*" element={<Error />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" />
         <Route path="/register" />
@@ -53,7 +57,7 @@ function App() {
         <Route path="/plants" element={<PlantsPages />} />
 
         {/* ~~ Registers routes ~~ */}
-        {currentUser.username && (
+        {currentUser?.username && (
           <>
             <Route path="/create-plant" element={<PlantCreation />} />
             <Route path="/articles/:id" element={<Article />} />
@@ -61,8 +65,15 @@ function App() {
           </>
         )}
         {/* ~~ Admin routes ~~ */}
-        {currentUser.admin === 1 && (
-          <Route path="/create-article" element={<ArticleCreation />} />
+        {currentUser?.admin === 1 && (
+          <>
+            <Route path="/create-article" element={<ArticleCreation />} />
+            <Route
+              path="/articles-management"
+              element={<ArticlesManagement />}
+            />
+            <Route path="/users-management" element={<UsersManagement />} />
+          </>
         )}
       </Routes>
     </div>
