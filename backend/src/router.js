@@ -31,6 +31,7 @@ router.post(
 router.get("/articles", articleControllers.browse);
 router.get("/articles/:id", articleControllers.read);
 router.get("/articles/user/:id", articleControllers.getByUserId);
+router.get("/articles-latest", articleControllers.latestArticles);
 
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */
@@ -44,5 +45,7 @@ router.delete("/users/:id", userControllers.destroy);
 
 /* Articles Management */
 router.post("/create-article", articleControllers.add);
+router.delete("/articles/:id", articleControllers.destroy);
+router.put("/articles/:id", articleControllers.edit);
 
 module.exports = router;

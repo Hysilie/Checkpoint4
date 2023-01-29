@@ -35,7 +35,7 @@ export function CurrentArticleProvider({ children }) {
   );
 }
 
-CurrentArticleProvider.propTypes = {
+CurrentArticleContext.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
