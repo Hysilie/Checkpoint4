@@ -7,76 +7,51 @@ function BurgerMenu({ open, setOpen }) {
 
   return (
     <nav className="bg-main-dark text-main-white w-screen lg:w-fit p-8 h-screen">
-      <div className="flex flex-col gap-8 justify-evenly text-left">
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="hover:scale-110 duration-150"
-        >
+      <ul
+        className="flex flex-col gap-8 justify-evenly"
+        onClick={() => setOpen(!open)}
+        role="presentation"
+      >
+        <li className="hover:scale-110 duration-150">
           {" "}
           <Link to="/">
             HOME <hr />
           </Link>
-        </button>
+        </li>
 
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="hover:scale-110 duration-150"
-        >
+        <li className="hover:scale-110 duration-150">
           <Link to="/articles">ARTICLES</Link> <hr />
-        </button>
+        </li>
 
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="hover:scale-110 duration-150"
-        >
+        <li className="hover:scale-110 duration-150">
           OUR PLANTS <hr />
-        </button>
+        </li>
 
         {/* Registers only */}
         {currentUser.username && (
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            className="hover:scale-110 duration-150"
-          >
-            ADD PLANT
-            <hr />
-          </button>
+          <li>
+            ADD PLANT <hr />
+          </li>
         )}
         {currentUser.username && (
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            className="hover:scale-110 duration-150"
-          >
+          <li className="hover:scale-110 duration-150">
             <Link to="/create-article">ADD ARTICLE</Link>
             <hr />
-          </button>
+          </li>
         )}
 
         {/* Admins only */}
         {currentUser.admin === 1 && (
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            className="hover:scale-110 duration-150"
-          >
+          <li>
             OUR MEMBERS
             <hr />
-          </button>
+          </li>
         )}
 
-        <button
-          type="button"
-          onClick={() => setOpen(!open)}
-          className="hover:scale-110 duration-150"
-        >
+        <li className="hover:scale-110 duration-150">
           FOLLOW US <hr />
-        </button>
-      </div>
+        </li>
+      </ul>
     </nav>
   );
 }
