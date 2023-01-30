@@ -50,20 +50,21 @@ function FavoriteAndPicture({
         </ul>
         {/* Pagination */}
         <div className="flex  justify-center gap-3 mt-3 mb-6">
-          {pageNumberFavorite?.map((number) => (
-            <button
-              type="button"
-              className={` text-xl w-8 h-8  rounded-md ${
-                number === currentPageFavorite
-                  ? "bg-main-dark text-main-white"
-                  : "bg-main-white border-[1px] border-main-dark"
-              } `}
-              key={number}
-              onClick={() => handlePageChangeFavorite(number)}
-            >
-              {number}
-            </button>
-          ))}
+          {pageNumberFavorite?.length > 1 &&
+            pageNumberFavorite?.map((number) => (
+              <button
+                type="button"
+                className={` text-xl w-8 h-8  rounded-md ${
+                  number === currentPageFavorite
+                    ? "bg-main-dark text-main-white"
+                    : "bg-main-white border-[1px] border-main-dark"
+                } `}
+                key={number}
+                onClick={() => handlePageChangeFavorite(number)}
+              >
+                {number}
+              </button>
+            ))}
         </div>
       </article>
 
@@ -96,20 +97,21 @@ function FavoriteAndPicture({
         </ul>
         {/* Pagination */}
         <div className="flex  justify-center gap-3 mt-3 mb-6">
-          {pageNumbers?.map((number) => (
-            <button
-              type="button"
-              className={` text-xl w-8 h-8  rounded-md ${
-                number === currentPage
-                  ? "bg-main-dark text-main-white"
-                  : "bg-main-white border-[1px] border-main-dark"
-              } `}
-              key={number}
-              onClick={() => handlePageChange(number)}
-            >
-              {number}
-            </button>
-          ))}
+          {pageNumbers?.length > 1 &&
+            pageNumbers?.map((number) => (
+              <button
+                type="button"
+                className={` text-xl w-8 h-8  rounded-md ${
+                  number === currentPage
+                    ? "bg-main-dark text-main-white"
+                    : "bg-main-white border-[1px] border-main-dark"
+                } `}
+                key={number}
+                onClick={() => handlePageChange(number)}
+              >
+                {number}
+              </button>
+            ))}
         </div>
       </article>
     </div>
