@@ -5,7 +5,7 @@ import flower2 from "../assets/others/flowerbanner2.svg";
 function AnimationHome() {
   return (
     /* Love is the flower you’ve got to let grow.” */
-    <div className="my-8 relative  font-serif font-thin flex overflow-x-hidden border-b-[2px] border-t-[2px] border-main-dark">
+    <div className="mt-8 mb-6 relative  font-serif font-thin flex overflow-x-hidden border-b-[2px] border-t-[2px] border-main-dark">
       <div className=" animate-marquee whitespace-nowrap">
         <img
           src={flower1}

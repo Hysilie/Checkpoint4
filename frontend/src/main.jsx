@@ -5,17 +5,20 @@ import App from "./App";
 import { CurrentArticleProvider } from "./contexts/articleContext";
 import { CurrentUserProvider } from "./contexts/userContext";
 import { CurrentPlantProvider } from "./contexts/plantContext";
+import { CurrentFavoriteProvider } from "./contexts/favoriteContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <Router>
     <CurrentUserProvider>
-      <CurrentArticleProvider>
-        <CurrentPlantProvider>
-          <App />
-        </CurrentPlantProvider>
-      </CurrentArticleProvider>
+      <CurrentFavoriteProvider>
+        <CurrentArticleProvider>
+          <CurrentPlantProvider>
+            <App />
+          </CurrentPlantProvider>
+        </CurrentArticleProvider>
+      </CurrentFavoriteProvider>
     </CurrentUserProvider>
   </Router>
 );

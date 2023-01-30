@@ -82,7 +82,7 @@ function UsersManagement() {
       <label className="w-full flex justify-center">
         <input
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="An invitation to the botanic ..."
+          placeholder="Jane Austen ..."
           className="lg:w-2/6 w-4/6 p-3 border-[1px] border-main-dark rounded-xl opacity-60"
         />
       </label>

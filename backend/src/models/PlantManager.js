@@ -8,7 +8,7 @@ class PlantManager extends AbstractManager {
   /* Find all plants */
   findAll() {
     return this.connection.query(
-      `select ${this.table}.*, username from  ${this.table} inner join user on user.id = ${this.table}.user_id`
+      `select ${this.table}.*, username from  ${this.table} inner join user on user.id = ${this.table}.user_id ORDER by creationDate desc`
     );
   }
 
