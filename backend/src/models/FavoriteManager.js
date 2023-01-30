@@ -18,8 +18,8 @@ class FavoriteManager extends AbstractManager {
 
   addFavorite(favorite) {
     return this.connection.query(
-      `INSERT INTO ${this.table} (favorite, user_id, plant_id)
-    VALUES (1, ?, ?)`,
+      `INSERT INTO ${this.table} (user_id, plant_id, favorite)
+    VALUES (?, ?, 1)`,
       [favorite.user_id, favorite.plant_id]
     );
   }

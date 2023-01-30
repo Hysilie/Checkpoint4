@@ -14,7 +14,7 @@ const favoriteByUser = (req, res) => {
 };
 
 const addFavorite = (req, res) => {
-  const { favorite } = req.body;
+  const favorite = req.body;
 
   models.favorite
     .addFavorite(favorite)
