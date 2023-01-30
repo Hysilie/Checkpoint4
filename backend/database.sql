@@ -52,7 +52,7 @@ DROP TABLE IF EXISTS `favorite`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `favorite` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `favorite` tinyint DEFAULT '0',
   `user_id` int DEFAULT NULL,
   `plant_id` int DEFAULT NULL,

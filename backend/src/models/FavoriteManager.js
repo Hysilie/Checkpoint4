@@ -15,6 +15,14 @@ class FavoriteManager extends AbstractManager {
       [id]
     );
   }
+
+  addFavorite(favorite) {
+    return this.connection.query(
+      `INSERT INTO ${this.table} (favorite, user_id, plant_id)
+    VALUES (1, ?, ?)`,
+      [favorite.user_id, favorite.plant_id]
+    );
+  }
 }
 
 module.exports = FavoriteManager;
