@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import previousBtn from "@assets/icons/FramereturnArrow.svg";
 import FavoriteAndPicture from "@components/FavoriteAndPicture";
+import { useCurrentFavoriteContext } from "../../contexts/favoriteContext";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
 
@@ -11,6 +12,7 @@ function Profile() {
   const avatarRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser, setCurrentUser, token } = useCurrentUserContext();
+  const { myFavorites } = useCurrentFavoriteContext();
 
   const [myPictures, setMyPictures] = useState([]);
   const [userSettings, setUserSettings] = useState({
@@ -113,19 +115,35 @@ function Profile() {
   /* Pagination */
   /* Get the current Page and max tutorials to define pages */
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPageFavorite, setCurrentPageFavorite] = useState(1);
+
   const picturesPerPage = 4;
+  const favoritesPerPage = 4;
 
   /* Calculate the first and last index  for slice */
   const indexOfLastPicture = currentPage * picturesPerPage;
   const indexOfFirstPicture = indexOfLastPicture - picturesPerPage;
+  const indexOfLastFavorite = currentPageFavorite * favoritesPerPage;
+  const indexOfFirstFavorite = indexOfLastFavorite - favoritesPerPage;
 
   /* HandlePage with the currentPage number */
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePageChangeFavorite = (pageNumberFavorite) =>
+    setCurrentPageFavorite(pageNumberFavorite);
 
   /* Generate a page by the length */
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(myPictures.length / picturesPerPage); i += 1) {
     pageNumbers.push(i);
+  }
+
+  const pageNumberFavorite = [];
+  for (
+    let i = 1;
+    i <= Math.ceil(myFavorites.length / favoritesPerPage);
+    i += 1
+  ) {
+    pageNumberFavorite.push(i);
   }
 
   return (
@@ -142,11 +160,17 @@ function Profile() {
       <aside className="hidden lg:w-1/2 px-3 h-full lg:flex items-center">
         <FavoriteAndPicture
           indexOfLastPicture={indexOfLastPicture}
+          indexOfLastFavorite={indexOfLastFavorite}
           indexOfFirstPicture={indexOfFirstPicture}
+          indexOfFirstFavorite={indexOfFirstFavorite}
           pageNumbers={pageNumbers}
+          pageNumberFavorite={pageNumberFavorite}
           currentPage={currentPage}
+          currentPageFavorite={currentPageFavorite}
           myPictures={myPictures}
           handlePageChange={handlePageChange}
+          handlePageChangeFavorite={handlePageChangeFavorite}
+          myFavorites={myFavorites}
         />
         <div className="border-r-2  border-main-dark opacity-60 h-4/5" />
       </aside>
