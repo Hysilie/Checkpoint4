@@ -1,12 +1,11 @@
 import AnimationHome from "@components/AnimationHome";
 import Footer from "@components/Footer";
 import React, { useState, useEffect } from "react";
-import { /* useNavigate */ Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export default function Home() {
-  /* const navigate = useNavigate(); */
   const [latestArticles, setLatestArticles] = useState([]);
   const [latestPlants, setLatestPlants] = useState([]);
 
@@ -45,14 +44,14 @@ export default function Home() {
     latestPlants && (
       <main className="h-[80vh]">
         {/* News section */}
-        <section className="mx-8 mt-3 mb-8  lg:mb-[8%]">
+        <section className="mx-8 mt-3 mb-8  ">
           <h2 className=" text-xl lg:text-2xl">
             NEWS{" "}
             <span className="px-3 text-sm underline">
               <Link to="/articles">view all</Link>
             </span>
           </h2>
-          <ul className="flex flex-col gap-3 py-3 lg:p-0 lg:flex-row justify-evenly lg:m-8">
+          <ul className="flex flex-col gap-3 py-3 lg:p-0 lg:flex-row justify-evenly lg:m-8 ">
             {latestArticles?.map((article, index) => (
               <li
                 key={article.id}
@@ -85,7 +84,7 @@ export default function Home() {
         <AnimationHome />
 
         {/* Plants section */}
-        <section className="m-8">
+        <section className="m-8 h-fit mb-[8%]">
           <h2 className=" text-xl lg:text-2xl">
             LATEST PLANTS{" "}
             <span className="px-3 text-sm underline">

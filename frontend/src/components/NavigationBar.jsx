@@ -128,11 +128,14 @@ function NavigationBar() {
             <>
               {" "}
               <li className="hover:scale-110 duration-150">
+                <Link to="/create-article">ADD ARTICLE</Link>
+              </li>
+              <li className="hover:scale-110 duration-150">
                 {" "}
                 <Link to="/users-management">MEMBERS</Link>
               </li>
               <li className="hover:scale-110 duration-150">
-                <Link to="/create-article">ADD ARTICLE</Link>
+                <Link to="/articles-management">MY ARTICLES</Link>
               </li>
             </>
           )}
