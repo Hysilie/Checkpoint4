@@ -67,6 +67,8 @@ router.delete("/plants/:id", plantControllers.destroy);
 /* Favorite Management */
 router.get("/favorites/:id", favoriteControllers.favoriteByUser);
 router.post("/favorites", favoriteControllers.addFavorite);
+router.delete("/favorites", favoriteControllers.deleteFavorite);
+
 /* Plants picture management */
 router.post(
   "/pictures",

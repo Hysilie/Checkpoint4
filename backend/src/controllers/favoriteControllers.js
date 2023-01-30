@@ -27,7 +27,26 @@ const addFavorite = (req, res) => {
     });
 };
 
+const deleteFavorite = (req, res) => {
+  const favorite = req.body;
+
+  models.favorite
+    .deleteFavorite(favorite)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   favoriteByUser,
   addFavorite,
+  deleteFavorite,
 };
