@@ -11,9 +11,10 @@ const { VITE_BACKEND_URL } = import.meta.env;
 export default function Plant() {
   const { myFavorites, setMyFavorites, getMyFavorites } =
     useCurrentFavoriteContext();
+
   const { currentUser, token } = useCurrentUserContext();
   const { id } = useParams();
-  const [favorite, setFavorite] = useState(false);
+
   const [plant, setPlant] = useState([]);
   const plantID = parseInt(id, 10);
   /* Get the article by his id, get by params */
@@ -31,11 +32,15 @@ export default function Plant() {
     getPlant();
   }, []);
 
+  const checkTheStatus = () =>
+    myFavorites?.some((myfavorite) => myfavorite.plant_id === plantID);
+
+  const [favorite, setFavorite] = useState(checkTheStatus);
+
   const addFavorite = () => {
     const checkFavorite = myFavorites?.some(
       (myfavorite) => myfavorite.plant_id === plantID
     );
-
     if (!checkFavorite) {
       const myHeaders = new Headers();
       myHeaders.append("Authorization", `Bearer ${token}`);

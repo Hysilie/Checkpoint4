@@ -1,6 +1,7 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useCurrentUserContext } from "./userContext";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -10,7 +11,7 @@ export default CurrentFavoriteContext;
 
 export function CurrentFavoriteProvider({ children }) {
   const { currentUser, token } = useCurrentUserContext();
-  const [myFavorites, setMyFavorites] = useState([]);
+  const [myFavorites, setMyFavorites] = useLocalStorage("favorites", []);
 
   const getMyFavorites = () => {
     const myHeaders = new Headers();
