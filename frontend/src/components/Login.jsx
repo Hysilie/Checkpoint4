@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 import { useCurrentUserContext } from "../contexts/userContext";
 import flowers from "../assets/others/flowers.svg";
 
@@ -24,6 +25,40 @@ function Login() {
     });
   };
 
+  const notifyConnexion = () =>
+    toast.success(`Welcome ${userLoginInformations.username}`, {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
+  const notifyErrorConnexion = () =>
+    toast.error(`Informations incorrect`, {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "red",
+      },
+    });
+
   /* Fetch user's informations to login */
   const handleSubmitLogin = (e) => {
     e.preventDefault();
@@ -40,16 +75,25 @@ function Login() {
       .then((response) => response.json())
       .then((result) => {
         if (result.token) {
+          notifyConnexion();
           setCurrentUser(result.user);
           setToken(result.token);
-          navigate("/");
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+        } else {
+          notifyErrorConnexion();
         }
       })
-      .catch((error) => console.warn(error));
+      .catch((error) => {
+        console.warn(error);
+        notifyErrorConnexion();
+      });
   };
 
   return (
     <section className=" relative z-[2] font-serif flex flex-col grow  m-6 items-center justify-center  ">
+      <Toaster reverseOrder={false} position="top-center" />
       {/* Hidden for medium screen */}
       <div className=" lg:hidden m-6 font-bold">
         <img

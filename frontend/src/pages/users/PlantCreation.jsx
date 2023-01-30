@@ -2,12 +2,30 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
 import uploadImg from "@assets/icons/FrameuploadImg.svg";
+import { toast, Toaster } from "react-hot-toast";
 import plantUpload from "../../assets/others/plantUpload.jpg";
 import { useCurrentUserContext } from "../../contexts/userContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function PlantCreation() {
+  const notifyPost = () =>
+    toast.success("Plant picture added", {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
   const navigate = useNavigate();
   const { currentUser, token } = useCurrentUserContext();
   const userID = currentUser.id;
@@ -39,7 +57,10 @@ function PlantCreation() {
         .then((response) => response.text())
         .then((results) => {
           console.warn("results", results);
-          navigate("/");
+          notifyPost();
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
         })
         .catch((error) => {
           console.error(error);
@@ -49,6 +70,8 @@ function PlantCreation() {
 
   return (
     <section className="h-[80vh]">
+      <Toaster reverseOrder={false} position="top-center" />
+
       <PreviousBtn />
       <h2 className="text-center my-6 text-xl">POST A PLANT</h2>
       <div className="w-full h-full  lg:flex p-[5%]">
@@ -60,9 +83,10 @@ function PlantCreation() {
           <input
             onChange={(e) => setPlantTitle(e.target.value)}
             name="title"
+            minLength={10}
             maxLength={80}
             id="title"
-            placeholder="My beautiful Monstera Deliciosa ... (max. 80 chars.)"
+            placeholder="My beautiful Monstera Deliciosa ... (min. 10 - max. 80 chars.)"
             type="text"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-second-dark"
@@ -78,7 +102,9 @@ function PlantCreation() {
             <img
               src={uploadImg}
               alt="Upload Icon"
-              className=" cursor-pointer"
+              className={`cursor-pointer ${
+                plantTitle.length > 10 ? "duration-300" : "hidden duration-300"
+              }`}
             />
           </label>
 

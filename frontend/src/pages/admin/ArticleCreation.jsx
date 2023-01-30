@@ -4,6 +4,7 @@ import PreviousBtn from "@components/PreviousBtn";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
+import { toast, Toaster } from "react-hot-toast";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import { useCurrentArticleContext } from "../../contexts/articleContext";
 import quillConfig from "../../config/quillConfig";
@@ -12,6 +13,23 @@ import flowers from "../../assets/others/flowers.svg";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function ArticleCreation() {
+  const notifyCreate = () =>
+    toast.success("Article created", {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
   const navigate = useNavigate();
   const { currentUser, token } = useCurrentUserContext();
   const { allArticles, setAllArticles } = useCurrentArticleContext();
@@ -46,6 +64,7 @@ function ArticleCreation() {
     })
       .then((response) => {
         console.warn(response);
+        notifyCreate();
         setAllArticles(...allArticles, {
           title: articleTitle,
           content: articleContentQuill,
@@ -60,6 +79,8 @@ function ArticleCreation() {
 
   return (
     <section className="h-[80vh]">
+      <Toaster reverseOrder={false} position="top-center" />
+
       <PreviousBtn />
       <h2 className="text-center my-6 text-xl">CREATE AN ARTICLE</h2>
       <form
@@ -75,6 +96,7 @@ function ArticleCreation() {
             onChange={handleArticleTitle}
             name="title"
             maxLength={80}
+            minLength={10}
             id="title"
             placeholder="An invitation to the Botanic Garden ... (max. 80 chars.)"
             type="text"
