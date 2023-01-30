@@ -72,7 +72,10 @@ router.delete("/favorites", favoriteControllers.deleteFavorite);
 router.delete("/favorites-all", favoriteControllers.deleteAllFavorites);
 
 /* Comment Management */
+router.get("/comments/:id", commentControllers.getByArticleId);
 router.post("/comments", commentControllers.add);
+router.put("/comments/:id", commentControllers.update);
+router.delete("/comments/:id", commentControllers.destroy);
 
 /* Plants picture management */
 router.post(
