@@ -43,7 +43,7 @@ function DeleteModaleUser({
                         className="text-lg font-medium leading-6 text-main-white text-center"
                         id="modal-title"
                       >
-                        Desactivate the account
+                        DESACTIVATE THE ACCOUNT
                       </h3>
                       <div className="mt-2 text-center">
                         <p className="text-sm text-main-white">
@@ -63,14 +63,14 @@ function DeleteModaleUser({
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-600  hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                   >
-                    Desactivate
+                    DESACTIVATE
                   </button>
                   <button
                     onClick={() => setConfirmDeleteModale(!confirmDeleteModale)}
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-main-white bg-second-dark px-4 py-2 text-base font-medium text-main-white shadow-sm hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   >
-                    Cancel
+                    CANCEL
                   </button>
                 </div>
               </div>

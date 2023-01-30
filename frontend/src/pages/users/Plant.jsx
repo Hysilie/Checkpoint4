@@ -20,6 +20,7 @@ export default function Plant() {
   const { currentUser, token } = useCurrentUserContext();
   const { id } = useParams();
 
+  /* Notifications */
   const notifyDeleteSucess = () =>
     toast.success(`Your publication has been delete`, {
       style: {
@@ -37,6 +38,24 @@ export default function Plant() {
       },
     });
 
+  const notifyError = () =>
+    toast.error("A problem occurred", {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "red",
+      },
+    });
+
+  /* Get the plant by ID */
   const [plant, setPlant] = useState([]);
   const plantID = parseInt(id, 10);
   /* Get the article by his id, get by params */
@@ -148,10 +167,10 @@ export default function Plant() {
       })
       .catch((error) => {
         console.warn(error);
+        notifyError();
       });
 
     /* Delete the plant by ID */
-
     fetch(`${VITE_BACKEND_URL}/plants/${plantID}`, {
       method: "DELETE",
       headers: myHeaders,
@@ -171,10 +190,11 @@ export default function Plant() {
       })
       .catch((error) => {
         console.warn(error);
+        notifyError();
       });
   };
 
-  /* Check if currentUser match with the plant user_id */
+  /* Check to display the remove button */
   const checkUser = currentUser.id === plant.user_id;
 
   return (

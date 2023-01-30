@@ -40,13 +40,13 @@ function DeleteModalePlant({
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <h3
-                        className="text-lg font-medium leading-6 text-main-dark text-center"
+                        className="text-lg  font-medium leading-6 text-main-dark text-center"
                         id="modal-title"
                       >
-                        Delete your publication
+                        DELETE YOUR PUBLICATION
                       </h3>
-                      <div className="mt-2 ">
-                        <p className="text-sm text-main-dark">
+                      <div className="mt-2 text-center ">
+                        <p className="text-sm text-center text-main-dark">
                           Are you sure you want to delete this publication?{" "}
                           <br />
                           This action is irreversible and cannot be undone.
@@ -61,14 +61,14 @@ function DeleteModalePlant({
                     type="button"
                     className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-600  hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                   >
-                    Delete
+                    DELETE
                   </button>
                   <button
                     onClick={() => setConfirmDeleteModale(!confirmDeleteModale)}
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md border border-main-white bg-main-dark px-4 py-2 text-base font-medium text-main-white shadow-sm hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   >
-                    Cancel
+                    CANCEL
                   </button>
                 </div>
               </div>
