@@ -10,24 +10,24 @@ export default CurrentPlantContext;
 export function CurrentPlantProvider({ children }) {
   const [allPlants, setAllPlants] = useState([]);
 
+  const getAllPlants = () => {
+    fetch(`${VITE_BACKEND_URL}/plants`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllPlants(data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
   useEffect(() => {
-    const getAllPlants = () => {
-      fetch(`${VITE_BACKEND_URL}/plants`)
-        .then((response) => response.json())
-        .then((data) => {
-          setAllPlants(data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    };
     getAllPlants();
   }, [allPlants?.length]);
 
   return (
     <CurrentPlantContext.Provider
       /* eslint-disable react/jsx-no-constructed-context-values */
-      value={{ allPlants, setAllPlants }}
+      value={{ allPlants, setAllPlants, getAllPlants }}
     >
       {children}
     </CurrentPlantContext.Provider>

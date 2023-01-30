@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import previousBtn from "@assets/icons/FramereturnArrow.svg";
 import FavoriteAndPicture from "@components/FavoriteAndPicture";
+import { toast, Toaster } from "react-hot-toast";
 import { useCurrentFavoriteContext } from "../../contexts/favoriteContext";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
@@ -28,6 +29,58 @@ function Profile() {
     });
   };
 
+  /* Notification */
+  const notifyChange = () =>
+    toast.success(`Changes have been made`, {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
+  const notifyImage = () =>
+    toast.success(`Your profile picture has been uploaded`, {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
+  const notifyError = () =>
+    toast.error("A problem occurred", {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "red",
+      },
+    });
+
   /* Update the avatar */
   const handleSubmitAvatar = (e) => {
     e.preventDefault();
@@ -47,12 +100,14 @@ function Profile() {
       fetch("http://localhost:5000/avatars", requestOptions)
         .then((response) => response.json())
         .then((results) => {
+          notifyImage();
           setCurrentUser({
             ...currentUser,
             profilePicture: results.picture,
           });
         })
         .catch((error) => {
+          notifyError();
           console.error(error);
         });
     }
@@ -81,12 +136,16 @@ function Profile() {
       .then((response) => response.text())
       .then((results) => {
         console.warn(results);
+        notifyChange();
         setCurrentUser({
           ...currentUser,
           firstname: userSettings.firstname,
         });
       })
-      .catch((error) => console.error(`Error:`, error));
+      .catch((error) => {
+        notifyError();
+        console.error(`Error:`, error);
+      });
   };
 
   /* Get all pictures from the user */
@@ -148,6 +207,7 @@ function Profile() {
 
   return (
     <main className=" bg-main-white h-screen w-screen flex flex-col lg:flex-row ">
+      <Toaster reverseOrder={false} position="top-center" />
       <button
         type="button"
         onClick={() => navigate("/")}

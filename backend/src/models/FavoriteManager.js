@@ -5,6 +5,7 @@ class FavoriteManager extends AbstractManager {
     super({ table: "favorite" });
   }
 
+  /* Find all favorites of a user */
   findFavoriteByUser(id) {
     return this.connection.query(
       `SELECT  ${this.table}.*, user.username, plant.picture, plant.title
@@ -16,6 +17,7 @@ class FavoriteManager extends AbstractManager {
     );
   }
 
+  /* Add a favorite for a user */
   addFavorite(favorite) {
     return this.connection.query(
       `INSERT INTO ${this.table} (user_id, plant_id, favorite)
@@ -24,10 +26,19 @@ class FavoriteManager extends AbstractManager {
     );
   }
 
+  /* Remove favorite for a user */
   deleteFavorite(favorite) {
     return this.connection.query(
       `DELETE FROM ${this.table} WHERE user_id = ? AND plant_id = ?`,
       [favorite.user_id, favorite.plant_id]
+    );
+  }
+
+  /* Delete every favorite status */
+  deleteAllFavorites(favorite) {
+    return this.connection.query(
+      `DELETE FROM ${this.table} WHERE  plant_id = ?`,
+      [favorite.plant_id]
     );
   }
 }
