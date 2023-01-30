@@ -5,6 +5,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
 import { toast, Toaster } from "react-hot-toast";
+import ArticleModale from "@components/ArticleModale";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import { useCurrentArticleContext } from "../../contexts/articleContext";
 import quillConfig from "../../config/quillConfig";
@@ -77,6 +78,8 @@ function ArticleCreation() {
       .catch((error) => console.warn("error", error));
   };
 
+  const [confirmDeleteModale, setConfirmDeleteModale] = useState(false);
+
   return (
     <section className="h-[80vh]">
       <Toaster reverseOrder={false} position="top-center" />
@@ -127,6 +130,9 @@ function ArticleCreation() {
         <div className="lg:absolute lg:bottom-60 flex w-full lg:w-1/2 justify-center  lg:justify-start gap-10 px-3">
           <button
             type="button"
+            onClick={() => {
+              setConfirmDeleteModale(!false);
+            }}
             className=" text-sm h-12 shadow-md text-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300"
           >
             PREVIOUS
@@ -139,6 +145,12 @@ function ArticleCreation() {
           </button>
         </div>
       </form>
+      <ArticleModale
+        articleTitle={articleTitle}
+        articleContentQuill={articleContentQuill}
+        setConfirmDeleteModale={setConfirmDeleteModale}
+        confirmDeleteModale={confirmDeleteModale}
+      />
     </section>
   );
 }
