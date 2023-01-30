@@ -10,6 +10,7 @@ function BurgerMenu({ open, setOpen }) {
   const logOut = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    localStorage.removeItem("favorites");
     setCurrentUser({});
     navigate("/");
   };

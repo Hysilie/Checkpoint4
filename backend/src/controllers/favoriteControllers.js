@@ -1,5 +1,6 @@
 const models = require("../models");
 
+/* Favorites of a user */
 const favoriteByUser = (req, res) => {
   const id = parseInt(req.params.id, 10);
   models.favorite
@@ -13,6 +14,7 @@ const favoriteByUser = (req, res) => {
     });
 };
 
+/* Add a favorite for a user */
 const addFavorite = (req, res) => {
   const favorite = req.body;
 
@@ -27,6 +29,7 @@ const addFavorite = (req, res) => {
     });
 };
 
+/* Remove a favorite for a user */
 const deleteFavorite = (req, res) => {
   const favorite = req.body;
 
@@ -45,8 +48,28 @@ const deleteFavorite = (req, res) => {
     });
 };
 
+/* Remove all favorites */
+const deleteAllFavorites = (req, res) => {
+  const favorite = req.body;
+
+  models.favorite
+    .deleteAllFavorites(favorite)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   favoriteByUser,
   addFavorite,
   deleteFavorite,
+  deleteAllFavorites,
 };

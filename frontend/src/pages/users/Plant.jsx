@@ -1,19 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
 import fav from "@assets/icons/Framefav.svg";
 import nofav from "@assets/icons/Framenofav.svg";
+import trash from "@assets/icons/trash2.svg";
+import DeleteModalePlant from "@components/DeleteModalePlant";
+import { toast, Toaster } from "react-hot-toast";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import { useCurrentFavoriteContext } from "../../contexts/favoriteContext";
+import { useCurrentPlantContext } from "../../contexts/plantContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export default function Plant() {
+  const navigate = useNavigate();
   const { myFavorites, setMyFavorites, getMyFavorites } =
     useCurrentFavoriteContext();
-
+  const { getAllPlants } = useCurrentPlantContext();
   const { currentUser, token } = useCurrentUserContext();
   const { id } = useParams();
+
+  const notifyDeleteSucess = () =>
+    toast.success(`Your publication has been delete`, {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
 
   const [plant, setPlant] = useState([]);
   const plantID = parseInt(id, 10);
@@ -32,6 +54,7 @@ export default function Plant() {
     getPlant();
   }, []);
 
+  /* Handle Favorite */
   const checkTheStatus = () =>
     myFavorites?.some((myfavorite) => myfavorite.plant_id === plantID);
 
@@ -102,8 +125,62 @@ export default function Plant() {
     setFavorite(false);
   };
 
+  /* Handle Remove button for plant which match with the user */
+  const [confirmDeleteModale, setConfirmDeleteModale] = useState(false);
+  const handleRemove = () => {
+    const myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
+
+    const body = JSON.stringify({
+      plant_id: plantID,
+    });
+    /* Delete all the favorites */
+
+    fetch(`${VITE_BACKEND_URL}/favorites-all`, {
+      method: "DELETE",
+      headers: myHeaders,
+      body,
+      redirect: "follow",
+    })
+      .then((response) => {
+        console.warn(response);
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+
+    /* Delete the plant by ID */
+
+    fetch(`${VITE_BACKEND_URL}/plants/${plantID}`, {
+      method: "DELETE",
+      headers: myHeaders,
+      body,
+      redirect: "follow",
+    })
+      .then((response) => {
+        if (response.ok) {
+          setConfirmDeleteModale(false);
+          getMyFavorites();
+          getAllPlants();
+          notifyDeleteSucess();
+          setTimeout(() => {
+            navigate(-1);
+          }, 2000);
+        }
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  };
+
+  /* Check if currentUser match with the plant user_id */
+  const checkUser = currentUser.id === plant.user_id;
+
   return (
     <section className="h-[80vh]">
+      <Toaster reverseOrder={false} position="top-center" />
+
       <PreviousBtn />
       <h2 className="text-center my-6 text-xl">PLANT</h2>
 
@@ -123,7 +200,26 @@ export default function Plant() {
             className="px-2 my-3"
             onClick={!favorite ? addFavorite : removeFavorite}
           >
-            <img src={favorite ? fav : nofav} alt="Favorite button" />
+            <img
+              src={favorite ? fav : nofav}
+              alt="Favorite button"
+              className="w-6 h-6"
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => setConfirmDeleteModale(!false)}
+            className="px-2 my-3"
+          >
+            {checkUser === true ? (
+              <img
+                src={trash}
+                alt="Remove button"
+                className="w-5 h-5 hover:scale-105"
+              />
+            ) : (
+              ""
+            )}
           </button>
         </article>
         {/* Content of the article */}
@@ -135,6 +231,11 @@ export default function Plant() {
           />
         </aside>
       </div>
+      <DeleteModalePlant
+        setConfirmDeleteModale={setConfirmDeleteModale}
+        confirmDeleteModale={confirmDeleteModale}
+        handleRemove={handleRemove}
+      />
     </section>
   );
 }

@@ -21,7 +21,7 @@ function DeleteModaleArticle({
               <div className="relative transform overflow-hidden rounded-lg border-[1px] border-main-white bg-main-dark text-main-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-main-dark px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-main-white border border-main-dark  sm:mx-0 sm:h-10 sm:w-10">
                       <svg
                         className="h-6 w-6 text-main-dark"
                         xmlns="http://www.w3.org/2000/svg"
