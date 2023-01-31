@@ -143,13 +143,14 @@ function Article() {
             {/* Comments */}
             <div className="hidden lg:block">
               <Comments
+                setContentArticle={setContentArticle}
                 handleContentArticle={handleContentArticle}
                 deleteComment={deleteComment}
                 currentUser={currentUser}
                 comments={comments}
                 addComment={addComment}
                 contentArticle={contentArticle}
-                setContentArticle={setContentArticle}
+                getComments={getComments}
               />
             </div>
             {/* Comments */}
@@ -171,6 +172,7 @@ function Article() {
               addComment={addComment}
               contentArticle={contentArticle}
               setContentArticle={setContentArticle}
+              getComments={getComments}
             />
           </div>
         </div>
