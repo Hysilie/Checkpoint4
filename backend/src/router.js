@@ -19,6 +19,7 @@ const articleControllers = require("./controllers/articleControllers");
 const plantControllers = require("./controllers/plantControllers");
 const fileControllers = require("./controllers/fileControllers");
 const favoriteControllers = require("./controllers/favoriteControllers");
+const commentControllers = require("./controllers/commentControllers");
 
 /* ~~ PUBLIC ROUTES  ~~ */
 /* Register and Login */
@@ -69,6 +70,12 @@ router.get("/favorites/:id", favoriteControllers.favoriteByUser);
 router.post("/favorites", favoriteControllers.addFavorite);
 router.delete("/favorites", favoriteControllers.deleteFavorite);
 router.delete("/favorites-all", favoriteControllers.deleteAllFavorites);
+
+/* Comment Management */
+router.get("/comments/:id", commentControllers.getByArticleId);
+router.post("/comments", commentControllers.add);
+router.put("/comments/:id", commentControllers.update);
+router.delete("/comments/:id", commentControllers.destroy);
 
 /* Plants picture management */
 router.post(

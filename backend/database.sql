@@ -74,6 +74,35 @@ INSERT INTO `favorite` VALUES (1,1,1,12);
 /*!40000 ALTER TABLE `favorite` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+DROP TABLE IF EXISTS `comment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comment` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `content` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `creationDate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_id` int DEFAULT NULL,
+  `article_id` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id_idx` (`user_id`),
+  KEY `article_id_idx` (`article_id`),
+  CONSTRAINT `article` FOREIGN KEY (`article_id`) REFERENCES `article` (`id`),
+  CONSTRAINT `user` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comment`
+--
+
+LOCK TABLES `comment` WRITE;
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (2,'Je suis un premier commentaire','2023-01-29 14:49:47',2,1),(3,'Je suis un test de commentaire par POST method','2023-01-30 23:08:15',1,2),(4,'Je suis un deuxième commentaire','2023-01-30 23:08:15',1,1);
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
 --
 -- Table structure for table `plant`
 --
