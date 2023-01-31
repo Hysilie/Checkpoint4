@@ -98,7 +98,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (2,'Je suis un premier commentaire','2023-01-29 14:49:47',2,1),(3,'Je suis un test de commentaire par POST method','2023-01-30 23:08:15',1,2),(4,'Je suis un deuxième commentaire','2023-01-30 23:08:15',1,1);
+INSERT INTO `comment` VALUES (5,'<p>I\'m so excited for this event! As a passionate gardener, I\'m always looking for new opportunities to expand my knowledge and experience. It sounds like a perfect place to do just that.&nbsp;</p>','2023-01-31 06:29:07',1,1),(6,'<p>What a great event! I can\'t wait to explore the Botanic Garden of Munich on January 13th and learn all about the diverse plant species. Can\'t wait to see the tropical and desert greenhouses and all the different outdoor gardens. See you there!</p>','2023-01-31 06:29:18',1,1);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -128,7 +128,7 @@ CREATE TABLE `plant` (
 
 LOCK TABLES `plant` WRITE;
 /*!40000 ALTER TABLE `plant` DISABLE KEYS */;
-INSERT INTO `plant` VALUES (11,'Green love ','d084bfea-7276-4266-aaea-99df28cd6c32-calathea.jpeg','2023-01-29 09:16:31',1),(12,'Green wedding ','1b2506c1-6838-4f67-89ea-1eb878398a71-philodendronpinkprincess.jpeg','2023-01-29 09:17:49',2),(13,'Celebrating plant life ','629669f0-783d-4d65-b6c5-deed51e8ae59-pothos.jpeg','2023-01-29 09:18:34',1),(14,'Celebrating growth and new beginnings.','4c4daace-efee-489e-a4e1-fcff1dd705db-plantUpload.jpg','2023-01-29 09:22:20',2),(15,'Where flowers and friendships bloom.','bbefcd88-6b10-4769-9a04-620976ad4003-flowers.jpg','2023-01-29 09:22:47',1),(16,'The garden is my medicine ','0f9dd0e9-dce9-40ff-a403-1550c2a73d05-zamioculas.jpeg','2023-01-29 09:23:22',2),(17,'Plants are beautiful ','ea614b43-cb7c-4d2c-8e16-2c7a5ec87207-syngoniumpink.jpeg','2023-01-29 09:23:56',1),(18,'Back to nature ','835fdc21-d686-416f-a7c2-4a261ab61f88-forest.jpg','2023-01-29 09:24:59',2),(19,'My Monstera Variegata is here !! ','24f0cb1f-f874-49c5-afd2-fe9a30f392f5-monsteravariegata.jpeg','2023-01-29 22:51:38',1);
+INSERT INTO `plant` VALUES (11,'Green love ','d084bfea-7276-4266-aaea-99df28cd6c32-calathea.jpeg','2023-01-29 09:16:31',1),(12,'Green wedding ','128520ac-0021-4875-8107-5bfc0e8a455d-philodendronpinkprincess.jpeg','2023-01-29 09:17:49',2),(13,'Celebrating plant life ','eb911fca-206e-450d-8bf6-4324ac38084f-forest.jpg','2023-01-29 09:18:34',3),(14,'Celebrating growth and new beginnings.','75b77977-6282-4601-8256-1776f6d103f5-woodii.jpeg','2023-01-29 09:22:20',2),(15,'Where flowers and friendships bloom.','bbefcd88-6b10-4769-9a04-620976ad4003-flowers.jpg','2023-01-29 09:22:47',3),(16,'The garden is my medicine ','0f9dd0e9-dce9-40ff-a403-1550c2a73d05-zamioculas.jpeg','2023-01-29 09:23:22',5),(17,'Plants are beautiful ','1b9128e7-74d2-4ba5-aa03-c44d7fa4d06f-monsteraadansonii.jpeg','2023-01-29 09:23:56',2),(18,'Back to nature ','28c017af-725a-43ee-b74a-3bdcb63fed67-pothos.jpeg','2023-01-29 09:24:59',4),(19,'My Monstera Variegata is here !! ','24f0cb1f-f874-49c5-afd2-fe9a30f392f5-monsteravariegata.jpeg','2023-01-29 22:51:38',2);
 /*!40000 ALTER TABLE `plant` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,9 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Marion','Mizu','marionmizulalonde@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',1,'2023-01-28 02:49:55',''),(2,'June','June','june@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-28 02:49:55',NULL);
+INSERT INTO `user` VALUES (1,'Marion','Mizu','marionmizulalonde@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',1,'2023-01-29 07:05:30',NULL),(2,'Clotilde','June','juneclo@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-31 07:05:30',NULL),(3,'Rosalia','Rose','rosaliaflowers@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-31 07:05:30',NULL),(4,'Axel','Zanshizu','axelzanshizu@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-31 07:05:30',NULL),(5,'Camille','Camelia','camille_lia@gmail.com','$argon2id$v=19$m=65536,t=5,p=1$s96L8bP5O6Ab6f3FwKuHew$/6oWd2Ku1MAob+EMW+Zq4kYRQLaSCTICEkh2lCxEVDs',0,'2023-01-31 07:05:30',NULL);
+
+
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

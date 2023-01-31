@@ -15,7 +15,12 @@ function Article() {
 
   const [article, setArticle] = useState([]);
   const [comments, setComments] = useState([]);
+
   const [contentArticle, setContentArticle] = useState("");
+
+  const handleContentArticle = (content) => {
+    setContentArticle(content);
+  };
 
   /* Get the article by his id, get by params */
   useEffect(() => {
@@ -138,6 +143,7 @@ function Article() {
             {/* Comments */}
             <div className="hidden lg:block">
               <Comments
+                handleContentArticle={handleContentArticle}
                 deleteComment={deleteComment}
                 currentUser={currentUser}
                 comments={comments}
@@ -158,6 +164,7 @@ function Article() {
           </aside>
           <div className=" md:hidden">
             <Comments
+              handleContentArticle={handleContentArticle}
               deleteComment={deleteComment}
               currentUser={currentUser}
               comments={comments}
