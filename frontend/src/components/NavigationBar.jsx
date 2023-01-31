@@ -6,6 +6,7 @@ import closeMenuBurger from "../assets/icons/FramecloseMenu.svg";
 import loginIcon from "../assets/icons/Framelogin.svg";
 import registerLinkArrow from "../assets/icons/FramearrowRightCorner.svg";
 import BurgerMenu from "./BurgerMenu";
+import WeatherWidget from "./WeatherWidget";
 
 function NavigationBar() {
   const [open, setOpen] = useState(false);
@@ -66,7 +67,8 @@ function NavigationBar() {
         </div>
 
         {/* Title */}
-        <div className="w-10/12 lg:w-8/12 flex justify-center items-center">
+        <div className="relative w-10/12 lg:w-8/12 flex justify-center items-center">
+          <WeatherWidget />
           <h1 className="text-4xl font-serif text-center  ">
             {" "}
             <Link to="/">Plants</Link>
@@ -93,7 +95,7 @@ function NavigationBar() {
         <button
           type="button"
           onClick={currentUser.username ? logOut : () => navigate("/register")}
-          className="hidden  relative w-1/12 lg:flex text-main-white bg-main-dark px-6 font-sans items-center text-lg"
+          className="hidden   relative w-1/12 lg:flex text-main-white bg-main-dark px-6 font-sans items-center text-lg"
         >
           {currentUser.username ? "DISCONNECT" : "REGISTER"}
           <img
