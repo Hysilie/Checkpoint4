@@ -50,7 +50,7 @@ function ArticlesManagement() {
   return (
     <section className="h-[80vh]">
       <PreviousBtn />
-      <h2 className="text-center my-6 text-xl">MEMBERS</h2>
+      <h2 className="text-center my-6 text-xl">ARTICLES MANAGEMENT</h2>
       <label className="w-full flex justify-center">
         <input
           onChange={(e) => setSearch(e.target.value)}
@@ -84,7 +84,7 @@ function ArticlesManagement() {
               <tbody className="text-sm divide-y divide-main-white">
                 {filtredArticles.length === 0 ? (
                   <tr className="mx-0 text-1xl">
-                    Aucun utilisateur n'a été trouvé
+                    Aucun article n'a été trouvé
                   </tr>
                 ) : (
                   filtredArticles?.map((article) => (

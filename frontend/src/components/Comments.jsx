@@ -31,7 +31,11 @@ function Comments({
                 type="button"
                 onClick={() => deleteComment(comment?.id)}
               >
-                <img src={trash} alt="trash" className=" w-5 h-5 m-1 " />
+                <img
+                  src={trash}
+                  alt="trash"
+                  className=" w-5 h-5 m-1 hover:scale-105"
+                />
               </button>
             )}
 
@@ -80,6 +84,7 @@ function Comments({
         placeholder="Write a comment... (max 250 chars.)"
         className=" w-5/6 border-main-dark mt-3"
         modules={quillConfig.modules}
+        preserveWhitespace
       />
       <div className="w-5/6 flex justify-end">
         <button
