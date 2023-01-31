@@ -7,10 +7,11 @@ import trash from "../assets/icons/trash2.svg";
 
 function Comments({
   comments,
-  setContent,
+  setContentArticle,
   addComment,
   currentUser,
   deleteComment,
+  contentArticle,
 }) {
   return (
     <ul className="flex flex-col m-2 p-2 items-center ">
@@ -72,7 +73,8 @@ function Comments({
       {/* Create a comment with Quill */}
       <ReactQuill
         theme="snow"
-        onChange={setContent}
+        value={contentArticle}
+        onChange={setContentArticle}
         placeholder="Write a comment... (max 250 chars.)"
         className=" w-5/6 border-main-dark mt-3"
         modules={quillConfig.modules}
