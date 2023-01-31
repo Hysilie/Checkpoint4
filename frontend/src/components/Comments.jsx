@@ -29,12 +29,7 @@ function Comments({
                 type="button"
                 onClick={() => deleteComment(comment?.id)}
               >
-                <img
-                  src={trash}
-                  alt="trash"
-                  className=" w-5 h-5 m-1 "
-                  onClick={() => deleteComment(comment?.id)}
-                />
+                <img src={trash} alt="trash" className=" w-5 h-5 m-1 " />
               </button>
             )}
 

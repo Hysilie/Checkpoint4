@@ -70,7 +70,6 @@ function Article() {
       user_id: currentUser.id,
     });
 
-    console.log(raw);
     const requestOptions = {
       method: "POST",
       headers: myHeaders,
@@ -80,11 +79,8 @@ function Article() {
 
     fetch(`${VITE_BACKEND_URL}/comments`, requestOptions)
       .then((response) => response.text())
-      .then((result) => {
-        console.warn(result);
-      })
-      .catch((error) => console.log("error", error));
 
+      .catch((error) => console.warn("error", error));
     setComments([...comments, content]);
     setContent("");
   };
