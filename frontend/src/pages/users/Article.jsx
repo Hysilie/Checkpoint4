@@ -15,7 +15,12 @@ function Article() {
 
   const [article, setArticle] = useState([]);
   const [comments, setComments] = useState([]);
-  const [contentQuill, setContent] = useState("");
+
+  const [contentArticle, setContentArticle] = useState("");
+
+  const handleContentArticle = (content) => {
+    setContentArticle(content);
+  };
 
   /* Get the article by his id, get by params */
   useEffect(() => {
@@ -60,12 +65,14 @@ function Article() {
 
   /* Add a comment */
   const addComment = (content) => {
+    if (content === "") return;
+
     const myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append("Authorization", `Bearer ${token}`);
 
     const raw = JSON.stringify({
-      content: contentQuill,
+      content: contentArticle,
       article_id: parseInt(id, 10),
       user_id: currentUser.id,
     });
@@ -82,7 +89,7 @@ function Article() {
 
       .catch((error) => console.warn("error", error));
     setComments([...comments, content]);
-    setContent("");
+    setContentArticle("");
   };
 
   /* Delete a comment */
@@ -136,12 +143,13 @@ function Article() {
             {/* Comments */}
             <div className="hidden lg:block">
               <Comments
+                handleContentArticle={handleContentArticle}
                 deleteComment={deleteComment}
                 currentUser={currentUser}
                 comments={comments}
                 addComment={addComment}
-                content={contentQuill}
-                setContent={setContent}
+                contentArticle={contentArticle}
+                setContentArticle={setContentArticle}
               />
             </div>
             {/* Comments */}
@@ -156,12 +164,13 @@ function Article() {
           </aside>
           <div className=" md:hidden">
             <Comments
+              handleContentArticle={handleContentArticle}
               deleteComment={deleteComment}
               currentUser={currentUser}
               comments={comments}
               addComment={addComment}
-              content={contentQuill}
-              setContent={setContent}
+              contentArticle={contentArticle}
+              setContentArticle={setContentArticle}
             />
           </div>
         </div>
