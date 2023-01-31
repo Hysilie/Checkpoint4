@@ -4,6 +4,7 @@ import "react-quill/dist/quill.bubble.css";
 import "react-quill/dist/quill.snow.css";
 import quillConfig from "../config/quillConfig";
 import trash from "../assets/icons/trash2.svg";
+import edit from "../assets/icons/Frameedit.svg";
 import { useCurrentUserContext } from "../contexts/userContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
@@ -62,7 +63,7 @@ function Comments({
   };
 
   return (
-    <ul className="flex flex-col m-2 p-2 items-center ">
+    <ul className=" flex flex-col m-2 p-2 items-center ">
       {comments?.map((comment, index) => (
         <li
           key={comment?.id}
@@ -88,11 +89,15 @@ function Comments({
 
             {comment?.user_id === currentUser?.id && (
               <button
-                className=""
+                className="absolute right-5"
                 type="button"
                 onClick={() => handleModifyComment(comment?.id)}
               >
-                Modify the comment
+                <img
+                  src={edit}
+                  alt="edit"
+                  className=" w-5 h-5 m-1 hover:scale-105"
+                />
               </button>
             )}
             {/* Header */}
@@ -105,7 +110,7 @@ function Comments({
                     .join("/")
                 : comment?.username?.toUpperCase()}
             </p>
-            <p className={` ${index % 2 !== 1 ? "font-semibold" : ""} pr-8`}>
+            <p className={` ${index % 2 !== 1 ? "font-semibold" : ""}  pr-12`}>
               {index % 2 === 0
                 ? comment?.username?.toUpperCase()
                 : comment?.creationDate
