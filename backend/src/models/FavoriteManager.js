@@ -50,7 +50,20 @@ class FavoriteManager extends AbstractManager {
     );
   }
 
-  /*  I want to delete all the favorite for a plant where the the creator of this plant is equal to 2  */
+  /* Get all the favorite  for a plant where the creator is ? */
+  getAllFavoritesByPlantCreator(userId) {
+    return this.connection.query(
+      `
+      SELECT ${this.table}.*, user.username, plant.picture, plant.title
+      FROM ${this.table}
+      LEFT JOIN plant ON plant_id = plant.id
+      LEFT JOIN user ON user.id = plant.user_id
+      WHERE user.id = ?`,
+      [userId]
+    );
+  }
+
+  /*  I want to delete all the favorite for a plant where the the creator is ?  */
   deleteAllFavoritesByPlantCreator(userId) {
     return this.connection.query(
       `

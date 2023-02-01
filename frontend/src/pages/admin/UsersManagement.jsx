@@ -56,71 +56,125 @@ function UsersManagement() {
         .includes(normalizeSearch)
   );
 
-  /* Delete user */
+  /* Make the delete of the user step by step to delete all the content
+  Use async and promise to check step by step the statement */
   const [confirmDeleteModale, setConfirmDeleteModale] = useState(false);
   const [id, setId] = useState();
-  const deleteUser = () => {
+  const deleteUser = async () => {
     const myHeader = new Headers();
     myHeader.append("Authorization", `Bearer ${token}`);
     myHeader.append("Content-Type", "application/json");
 
-    /* Get all comments of a user  */
-    fetch(`${VITE_BACKEND_URL}/comments-all-user/${parseInt(id, 10)}`, {
-      method: "GET",
-      headers: myHeader,
-    })
-      .then((res) => res.json())
+    try {
+      /* Get all comments of a user  */
+      const commentsResponse = await fetch(
+        `${VITE_BACKEND_URL}/comments-user/${parseInt(id, 10)}`,
+        {
+          method: "GET",
+          headers: myHeader,
+        }
+      );
+      const commentsData = await commentsResponse.json();
+
       /* if [] length > 0 delete */
-      .then((data) => {
-        if (data.length > 0) {
-          /* Delete all comments of a user */
-          fetch(`${VITE_BACKEND_URL}/comments-all-user/${parseInt(id, 10)}`, {
+      if (commentsData.length > 0) {
+        /* Delete all comments of a user */
+        await fetch(
+          `${VITE_BACKEND_URL}/comments-all-user/${parseInt(id, 10)}`,
+          {
             method: "DELETE",
             headers: myHeader,
-          });
-        }
-      });
+          }
+        );
+      }
 
-    /* Get all favorites of a user  */
-    fetch(`${VITE_BACKEND_URL}/favorites-all-user/${parseInt(id, 10)}`, {
-      method: "GET",
-      headers: myHeader,
-    })
-      .then((res) => res.json())
+      /* Get all favorites of a user  */
+      const favoritesResponse = await fetch(
+        `${VITE_BACKEND_URL}/favorites/${parseInt(id, 10)}`,
+        {
+          method: "GET",
+          headers: myHeader,
+        }
+      );
+      const favoritesData = await favoritesResponse.json();
 
       /* if myFavorites length > 0 delete */
-      .then((data) => {
-        if (data.length > 0) {
-          /* Delete all favorites of a user */
-          fetch(`${VITE_BACKEND_URL}/favorites-all-user/${parseInt(id, 10)}`, {
+      if (favoritesData.length > 0) {
+        /* Delete all favorites of a user */
+        await fetch(
+          `${VITE_BACKEND_URL}/favorites-all-user/${parseInt(id, 10)}`,
+          {
             method: "DELETE",
             headers: myHeader,
-          });
-        }
-      });
-
-    /* Delete all favorites of the plant of the creator  */
-    fetch(
-      `${VITE_BACKEND_URL}/favorites-all-plant-by-creator/${parseInt(id, 10)}`,
-      {
-        method: "DELETE",
-        headers: myHeader,
+          }
+        );
       }
-    );
 
-    /* Delete all plants published by a user */
-    fetch(`${VITE_BACKEND_URL}/plants-all-user/${parseInt(id, 10)}`, {
-      method: "DELETE",
-      headers: myHeader,
-    });
+      /* Get all favorite of the plant of the creator */
+      const favoritesPlantResponse = await fetch(
+        `${VITE_BACKEND_URL}/favorites-all-plant-by-creator/${parseInt(
+          id,
+          10
+        )}`,
+        {
+          method: "GET",
+          headers: myHeader,
+        }
+      );
+      const favoritesPlantData = await favoritesPlantResponse.text();
 
-    /* Delete the user */
-    fetch(`${VITE_BACKEND_URL}/users/${(id, 10)}`, {
-      method: "DELETE",
-      headers: myHeader,
-    });
-    setConfirmDeleteModale(!confirmDeleteModale);
-    setUsers(users.filter((user) => user.id !== id));
+      /* if myFavorites length > 0 delete */
+      if (favoritesPlantData.length > 0) {
+        /* Delete all favorites of the plant of the creator */
+        await fetch(
+          `${VITE_BACKEND_URL}/favorites-all-plant-by-creator/${parseInt(
+            id,
+            10
+          )}`,
+          {
+            method: "DELETE",
+            headers: myHeader,
+          }
+        );
+      }
+
+      /* Get all plants of a user */
+      const plantsResponse = await fetch(
+        `${VITE_BACKEND_URL}/plants/user/${parseInt(id, 10)}`,
+        {
+          method: "GET",
+          headers: myHeader,
+        }
+      );
+      const plantsData = await plantsResponse.json();
+      if (plantsData.length > 0) {
+        /* Delete all plants published by a user */
+        await fetch(`${VITE_BACKEND_URL}/plants-all-user/${parseInt(id, 10)}`, {
+          method: "DELETE",
+          headers: myHeader,
+        });
+      }
+
+      /* Get the user */
+      const userResponse = await fetch(`${VITE_BACKEND_URL}/users/${id}`, {
+        method: "GET",
+        headers: myHeader,
+      });
+      const userData = await userResponse.json();
+      /* if userdata > 0  delete */
+      {
+        userData &&
+          (await fetch(`${VITE_BACKEND_URL}/users/${parseInt(id, 10)}`, {
+            method: "DELETE",
+            headers: myHeader,
+          }));
+      }
+
+      setConfirmDeleteModale(false);
+      setUsers(users.filter((user) => user.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleDeleteUser = async () => {

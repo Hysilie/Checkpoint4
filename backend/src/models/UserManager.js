@@ -38,8 +38,8 @@ class UserManager extends AbstractManager {
   /* Manage to update user */
   update(user) {
     return this.connection.query(
-      `update ${this.table} set  firstname = ?  where id = ?`,
-      [user.firstname, user.id]
+      `update ${this.table} set  username = ?  where id = ?`,
+      [user.username, user.id]
     );
   }
 

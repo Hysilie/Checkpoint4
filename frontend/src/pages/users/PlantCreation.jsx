@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
-import uploadImg from "@assets/icons/FrameuploadImg.svg";
 import { toast, Toaster } from "react-hot-toast";
 import plantUpload from "../../assets/others/plantUpload.jpg";
 import { useCurrentUserContext } from "../../contexts/userContext";
@@ -11,6 +10,23 @@ const { VITE_BACKEND_URL } = import.meta.env;
 function PlantCreation() {
   const notifyPost = () =>
     toast.success("Plant picture added", {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
+  const notifyError = () =>
+    toast.error("Picture not published, you must add a title.", {
       style: {
         border: "1px solid #eee",
         paddingTop: "16px",
@@ -38,6 +54,9 @@ function PlantCreation() {
   const plantPicture = useRef(null);
 
   const handleSubmitPicture = (e) => {
+    if (plantTitle.length <= 10) {
+      return notifyError();
+    }
     e.preventDefault();
     if (plantPicture.current.files[0]) {
       const myHeader = new Headers();
@@ -113,13 +132,16 @@ function PlantCreation() {
             htmlFor="image-upload"
             className="w-full flex justify-center my-8"
           >
-            <img
-              src={uploadImg}
+            <p
               alt="Upload Icon"
-              className={`cursor-pointer ${
-                plantTitle.length > 10 ? "duration-300" : "hidden duration-300"
-              }`}
-            />
+              className={`text-sm  font-semibold h-12 shadow-md text-center justify-center flex items-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 ${
+                plantTitle.length > 10
+                  ? " "
+                  : " opacity-40 hover:scale-100 cursor-not-allowed"
+              } `}
+            >
+              UPLOAD{" "}
+            </p>
           </label>
 
           <input
