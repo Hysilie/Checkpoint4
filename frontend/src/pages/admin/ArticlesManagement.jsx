@@ -32,6 +32,17 @@ function ArticlesManagement() {
   const [confirmDeleteModale, setConfirmDeleteModale] = useState(false);
   const [id, setId] = useState();
   const deleteArticles = () => {
+    /* Delete the associate article comments */
+    fetch(`${VITE_BACKEND_URL}/comments-all`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ articleId: id }),
+    });
+
+    /* Delete the article */
     fetch(`${VITE_BACKEND_URL}/articles/${id}`, {
       method: "DELETE",
       headers: {

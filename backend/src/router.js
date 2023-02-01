@@ -76,6 +76,7 @@ router.get("/comments/:id", commentControllers.getByArticleId);
 router.post("/comments", commentControllers.add);
 router.put("/comments/:id", commentControllers.update);
 router.delete("/comments/:id", commentControllers.destroy);
+router.delete("/comments-all", commentControllers.destroyByArticle);
 
 /* Plants picture management */
 router.post(

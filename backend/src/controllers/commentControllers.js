@@ -67,10 +67,28 @@ const destroy = (req, res) => {
       res.sendStatus(500);
     });
 };
+/* Delete all comments of an article */
+const destroyByArticle = (req, res) => {
+  const { articleId } = req.body;
+  models.comment
+    .deleteByArticle(articleId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 module.exports = {
   add,
   getByArticleId,
   update,
   destroy,
+  destroyByArticle,
 };

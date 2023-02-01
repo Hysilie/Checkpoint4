@@ -33,11 +33,20 @@ class CommentManager extends AbstractManager {
     );
   }
 
-  /* Destroy a comment */
+  /* Delete a comment */
   deleteComment(id) {
     return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
       id,
     ]);
+  }
+
+  /* Delete all comments of an article */
+  deleteByArticle(articleId) {
+    return this.connection.query(
+      `DELETE FROM
+  ${this.table} WHERE article_id = ?`,
+      [articleId]
+    );
   }
 }
 
