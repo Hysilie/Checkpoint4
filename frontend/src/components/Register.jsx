@@ -105,7 +105,7 @@ function Register() {
       <h3 className="text-lg">
         or{" "}
         <span className="underline">
-          <Link to="/login">register</Link>
+          <Link to="/login">login</Link>
         </span>
       </h3>
 

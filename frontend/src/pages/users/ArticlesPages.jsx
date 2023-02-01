@@ -54,6 +54,11 @@ function ArticlesPages() {
           />
         </label>
         <div className="w-full h-full  flex flex-col  gap-10 p-[5%]">
+          {filtredAllArticles.length === 0 && (
+            <p className="text-center text-xl">
+              No article found with this name
+            </p>
+          )}
           {filtredAllArticles
             ?.slice(indexOfFirstArticle, indexOfLastArticle)
             .map((article) => (

@@ -4,11 +4,13 @@ import { useCurrentUserContext } from "../../contexts/userContext";
 import trash from "../../assets/icons/trash.svg";
 import DeleteModaleUser from "../../components/DeleteModaleUser";
 import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
+import { useCurrentPlantContext } from "../../contexts/plantContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function UsersManagement() {
   const { token } = useCurrentUserContext();
+  const { getAllPlants } = useCurrentPlantContext();
 
   /* Get all the users */
   const [users, setUsers] = useState([]);
@@ -172,6 +174,7 @@ function UsersManagement() {
 
       setConfirmDeleteModale(false);
       setUsers(users.filter((user) => user.id !== id));
+      getAllPlants();
     } catch (error) {
       console.error(error);
     }

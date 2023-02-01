@@ -105,7 +105,7 @@ function Login() {
       </div>
 
       {/* Global screens */}
-      <h2 className="text-4xl"> Register</h2>
+      <h2 className="text-4xl"> Login</h2>
       <h3 className="text-lg">
         or{" "}
         <span className="underline">

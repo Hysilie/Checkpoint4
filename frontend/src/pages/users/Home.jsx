@@ -84,7 +84,7 @@ export default function Home() {
         <AnimationHome />
 
         {/* Plants section */}
-        <section className="m-8 h-fit mb-[8%]">
+        <section className="m-8 h-fit ">
           <h2 className=" text-xl lg:text-2xl">
             LATEST PLANTS{" "}
             <span className="px-3 text-sm underline">

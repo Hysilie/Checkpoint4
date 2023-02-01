@@ -59,7 +59,6 @@ function ArticleCreation() {
     setArticleTitle(e.target.value);
   };
   const [articleContentQuill, setArticleContentQuill] = useState("");
-
   /* Create the article */
   const handleSubmitArticle = async (e) => {
     e.preventDefault();

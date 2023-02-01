@@ -64,7 +64,7 @@ function BurgerMenu({ open, setOpen }) {
         )}
 
         <li className="hover:scale-110 duration-150">
-          FOLLOW US <hr />
+          ABOUT US <hr />
         </li>
         <button
           type="button"

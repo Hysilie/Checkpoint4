@@ -95,13 +95,13 @@ function NavigationBar() {
         <button
           type="button"
           onClick={currentUser.username ? logOut : () => navigate("/register")}
-          className="hidden   relative w-1/12 lg:flex text-main-white bg-main-dark px-3 font-sans items-center text-lg"
+          className="hidden  relative w-1/12 lg:flex text-main-white bg-main-dark px-3 font-sans items-center text-lg"
         >
           {currentUser.username ? "DISCONNECT" : "REGISTER"}
           <img
             src={registerLinkArrow}
             alt="Way to register"
-            className="w-3 h-3 absolute  top-3 right-0"
+            className="w-3 h-3 absolute   top-3 right-0"
           />
         </button>
       </section>
@@ -143,7 +143,7 @@ function NavigationBar() {
             </>
           )}
 
-          <li className="hover:scale-110 duration-150">FOLLOW US</li>
+          <li className="hover:scale-110 duration-150">ABOUT US</li>
         </ul>
       </section>
     </nav>

@@ -46,9 +46,10 @@ function PlantCreation() {
   const { currentUser, token } = useCurrentUserContext();
   const userID = currentUser.id;
 
-  /* Get Title of the post */
+  /* Get contents of the post */
   const [plantTitle, setPlantTitle] = useState("");
   const [plantImg, setPlantImg] = useState(null);
+  const [plantContent, setPlantContent] = useState("");
 
   /* Image Upload */
   const plantPicture = useRef(null);
@@ -67,6 +68,7 @@ function PlantCreation() {
       formData.append("picture", plantPicture.current.files[0]);
       formData.append("user_id", userID);
       formData.append("title", plantTitle);
+      formData.append("content", plantContent);
 
       const requestOptions = {
         method: "POST",
@@ -128,6 +130,19 @@ function PlantCreation() {
             by {currentUser.username}, the{" "}
             {Date().slice(0, 10).split("-").reverse().join("/")}
           </p>
+
+          <div className=" flex flex-col  mx-3 my-6 w-5/6 border-2 border-main-dark ">
+            <textarea
+              onChange={(e) => setPlantContent(e.target.value)}
+              id="content"
+              name="content"
+              rows="5"
+              cols="33"
+              className="bg-main-white focus-ring-0 border-0 p-2"
+              placeholder="Look at this fabulous Monstera Deliciosa ! This is a gift from my boyfriend. I am so exited to show you my new plant ! "
+            />
+          </div>
+
           <label
             htmlFor="image-upload"
             className="w-full flex justify-center my-8"
