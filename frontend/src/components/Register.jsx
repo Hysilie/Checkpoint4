@@ -153,6 +153,7 @@ function Register() {
             name="email"
             id="email"
             type="email"
+            pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/"
             placeholder="example@mail.com"
             required
             className="bg-main-white w-10/12  focus:ring-0 border-b-2 border-main-dark opacity-60"
