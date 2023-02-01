@@ -53,6 +53,14 @@ class PlantManager extends AbstractManager {
       [plant.title, picture, plant.user_id]
     );
   }
+
+  /* Delete all plants of a user */
+  deleteAllPlantsByUser(userId) {
+    return this.connection.query(
+      `delete from ${this.table} where user_id = ?`,
+      [userId]
+    );
+  }
 }
 
 module.exports = PlantManager;

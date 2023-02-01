@@ -89,6 +89,24 @@ const destroy = (req, res) => {
     });
 };
 
+/* Destroy all plant of a user */
+const destroyAllPlantsByUser = (req, res) => {
+  const userId = req.params.id;
+  models.plant
+    .deleteAllPlantsByUser(userId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 /* Controllers for update an image of a plant */
 const updatePicture = (req, res) => {
   const { picture } = req;
@@ -117,4 +135,5 @@ module.exports = {
   destroy,
   updatePicture,
   latestPlants,
+  destroyAllPlantsByUser,
 };

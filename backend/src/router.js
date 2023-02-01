@@ -64,18 +64,29 @@ router.put("/articles/:id", articleControllers.edit);
 
 /* Plants Management */
 router.delete("/plants/:id", plantControllers.destroy);
+router.delete("/plants-all-user/:id", plantControllers.destroyAllPlantsByUser);
 
 /* Favorite Management */
 router.get("/favorites/:id", favoriteControllers.favoriteByUser);
 router.post("/favorites", favoriteControllers.addFavorite);
 router.delete("/favorites", favoriteControllers.deleteFavorite);
 router.delete("/favorites-all", favoriteControllers.deleteAllFavorites);
-
+router.delete(
+  "/favorites-all-user/:id",
+  favoriteControllers.deleteAllFavoritesByUser
+);
+router.delete(
+  "/favorites-all-plant-by-creator/:id",
+  favoriteControllers.deleteAllFavoritesByPlantCreator
+);
 /* Comment Management */
 router.get("/comments/:id", commentControllers.getByArticleId);
+router.get("/comments-user/:id", commentControllers.getByUserId);
 router.post("/comments", commentControllers.add);
 router.put("/comments/:id", commentControllers.update);
 router.delete("/comments/:id", commentControllers.destroy);
+router.delete("/comments-all", commentControllers.destroyByArticle);
+router.delete("/comments-all-user/:id", commentControllers.destroyByUser);
 
 /* Plants picture management */
 router.post(

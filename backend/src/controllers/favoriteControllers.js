@@ -67,9 +67,49 @@ const deleteAllFavorites = (req, res) => {
     });
 };
 
+/* Remove all favorite of a user */
+const deleteAllFavoritesByUser = (req, res) => {
+  const userId = req.params.id;
+
+  models.favorite
+    .deleteAllFavoritesByUser(userId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
+/* Remove all favorite of a plant linked to a user */
+const deleteAllFavoritesByPlantCreator = (req, res) => {
+  const userId = req.params.id;
+
+  models.favorite
+    .deleteAllFavoritesByPlantCreator(userId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   favoriteByUser,
   addFavorite,
   deleteFavorite,
   deleteAllFavorites,
+  deleteAllFavoritesByUser,
+  deleteAllFavoritesByPlantCreator,
 };

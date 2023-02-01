@@ -60,12 +60,64 @@ function UsersManagement() {
   const [confirmDeleteModale, setConfirmDeleteModale] = useState(false);
   const [id, setId] = useState();
   const deleteUser = () => {
-    fetch(`${VITE_BACKEND_URL}/users/${id}`, {
+    const myHeader = new Headers();
+    myHeader.append("Authorization", `Bearer ${token}`);
+    myHeader.append("Content-Type", "application/json");
+
+    /* Get all comments of a user  */
+    fetch(`${VITE_BACKEND_URL}/comments-all-user/${parseInt(id, 10)}`, {
+      method: "GET",
+      headers: myHeader,
+    })
+      .then((res) => res.json())
+      /* if [] length > 0 delete */
+      .then((data) => {
+        if (data.length > 0) {
+          /* Delete all comments of a user */
+          fetch(`${VITE_BACKEND_URL}/comments-all-user/${parseInt(id, 10)}`, {
+            method: "DELETE",
+            headers: myHeader,
+          });
+        }
+      });
+
+    /* Get all favorites of a user  */
+    fetch(`${VITE_BACKEND_URL}/favorites-all-user/${parseInt(id, 10)}`, {
+      method: "GET",
+      headers: myHeader,
+    })
+      .then((res) => res.json())
+
+      /* if myFavorites length > 0 delete */
+      .then((data) => {
+        if (data.length > 0) {
+          /* Delete all favorites of a user */
+          fetch(`${VITE_BACKEND_URL}/favorites-all-user/${parseInt(id, 10)}`, {
+            method: "DELETE",
+            headers: myHeader,
+          });
+        }
+      });
+
+    /* Delete all favorites of the plant of the creator  */
+    fetch(
+      `${VITE_BACKEND_URL}/favorites-all-plant-by-creator/${parseInt(id, 10)}`,
+      {
+        method: "DELETE",
+        headers: myHeader,
+      }
+    );
+
+    /* Delete all plants published by a user */
+    fetch(`${VITE_BACKEND_URL}/plants-all-user/${parseInt(id, 10)}`, {
       method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+      headers: myHeader,
+    });
+
+    /* Delete the user */
+    fetch(`${VITE_BACKEND_URL}/users/${(id, 10)}`, {
+      method: "DELETE",
+      headers: myHeader,
     });
     setConfirmDeleteModale(!confirmDeleteModale);
     setUsers(users.filter((user) => user.id !== id));
