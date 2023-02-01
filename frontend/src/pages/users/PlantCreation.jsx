@@ -32,6 +32,7 @@ function PlantCreation() {
 
   /* Get Title of the post */
   const [plantTitle, setPlantTitle] = useState("");
+  const [plantImg, setPlantImg] = useState(null);
 
   /* Image Upload */
   const plantPicture = useRef(null);
@@ -54,18 +55,28 @@ function PlantCreation() {
         body: formData,
       };
       fetch(`${VITE_BACKEND_URL}/pictures`, requestOptions)
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then((results) => {
           console.warn("results", results);
+          setPlantImg(results);
           notifyPost();
           setTimeout(() => {
             navigate("/");
-          }, 1000);
+          }, 2000);
         })
         .catch((error) => {
           console.error(error);
         });
     }
+  };
+
+  /* Post a plant */
+  const handleSubmitPlant = (e) => {
+    e.preventDefault();
+    notifyPost();
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   return (
@@ -75,7 +86,10 @@ function PlantCreation() {
       <PreviousBtn />
       <h2 className="text-center my-6 text-xl">POST A PLANT</h2>
       <div className="w-full h-full  lg:flex p-[5%]">
-        <article className="relative lg:w-1/2  lg:border-r-2 lg:h-4/5 border-second-dark">
+        <form
+          onSubmit={handleSubmitPlant}
+          className="relative lg:w-1/2  lg:border-r-2 lg:h-4/5 border-second-dark"
+        >
           {/* Title of the article */}
           <label htmlFor="title" className="font-serif text-2xl w-20 px-3">
             Title
@@ -116,13 +130,19 @@ function PlantCreation() {
             accept="image/*"
             className="hidden"
           />
-        </article>
+        </form>
         {/* Content of the article */}
         <aside className="lg:w-1/2 flex md:items-center justify-center px-6 my-6 h-96">
           <img
-            src={plantUpload}
+            src={
+              plantImg
+                ? `${VITE_BACKEND_URL}/pictures/${plantImg?.picture}`
+                : plantUpload
+            }
             alt="userImage"
-            className="  grayscale w-fit lg:w-3/6 h-96 lg:h-fit border-[1px] border-second-dark shadow-md "
+            className={` ${
+              plantImg ? "" : "grayscale"
+            } w-fit lg:w-3/6 h-96 lg:h-fit border-[1px] border-second-dark shadow-md `}
           />
         </aside>
       </div>

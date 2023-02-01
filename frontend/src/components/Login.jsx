@@ -123,6 +123,9 @@ function Login() {
             Username
           </label>
           <input
+            pattern="[a-zA-Z0-9-]+"
+            minLength="3"
+            maxLength="20"
             onChange={handleInputChange}
             name="username"
             id="username"
@@ -142,6 +145,11 @@ function Login() {
             name="password"
             id="password"
             type="password"
+            minLength="8"
+            maxLength="30"
+            title="Should contain a minimum of 8 characters, using a mix of uppercase and lowercase letters, numbers, and special characters."
+            /* 8 chars. 1 lower . 1 Upper . 1 special . 1 number */
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             placeholder="********"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"

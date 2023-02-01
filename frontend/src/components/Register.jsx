@@ -123,6 +123,11 @@ function Register() {
             name="firstname"
             id="firstname"
             placeholder="Rose"
+            /* should contain only letters and - */
+            pattern="[a-zA-Z-]+"
+            minLength="3"
+            maxLength="25"
+            title="Should contain only letters and hyphen"
             type="text"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"
@@ -138,6 +143,10 @@ function Register() {
             name="username"
             id="username"
             type="text"
+            pattern="[a-zA-Z0-9-]+"
+            minLength="3"
+            maxLength="20"
+            title="Should contain only letters and numbers and hyphen"
             placeholder="Dark-Belladone"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"
@@ -153,9 +162,10 @@ function Register() {
             name="email"
             id="email"
             type="email"
-            pattern="/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/"
             placeholder="example@mail.com"
             required
+            /* regular pattern email */
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             className="bg-main-white w-10/12  focus:ring-0 border-b-2 border-main-dark opacity-60"
           />
         </article>
@@ -169,6 +179,11 @@ function Register() {
             name="password"
             id="password"
             type="password"
+            minLength="8"
+            maxLength="30"
+            title="Should contain a minimum of 8 characters, using a mix of uppercase and lowercase letters, numbers, and special characters."
+            /* 8 chars. 1 lower . 1 Upper . 1 special . 1 number */
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
             placeholder="********"
             required
             className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"

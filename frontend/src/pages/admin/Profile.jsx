@@ -277,6 +277,8 @@ function Profile() {
               onChange={handleInputChange}
               name="firstname"
               id="firstname"
+              pattern="[a-zA-Z-]+"
+              minLength="3"
               placeholder={currentUser.firstname}
               type="text"
               required
