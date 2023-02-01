@@ -85,10 +85,46 @@ const destroyByArticle = (req, res) => {
     });
 };
 
+/* Delete all comments of a user */
+const destroyByUser = (req, res) => {
+  const userId = req.params.id;
+  models.comment
+
+    .deleteByUser(userId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+/* Get all comment of  a user */
+const getByUserId = (req, res) => {
+  const userId = req.params.id;
+  models.comment
+
+    .findByUser(userId)
+    .then(([rows]) => {
+      res.send(rows);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   add,
   getByArticleId,
   update,
   destroy,
   destroyByArticle,
+  destroyByUser,
+  getByUserId,
 };

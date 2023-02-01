@@ -41,6 +41,27 @@ class FavoriteManager extends AbstractManager {
       [favorite.plant_id]
     );
   }
+
+  /* Delete every favorite of user */
+  deleteAllFavoritesByUser(userId) {
+    return this.connection.query(
+      `DELETE FROM ${this.table} WHERE user_id = ?`,
+      [userId]
+    );
+  }
+
+  /*  I want to delete all the favorite for a plant where the the creator of this plant is equal to 2  */
+  deleteAllFavoritesByPlantCreator(userId) {
+    return this.connection.query(
+      `
+      DELETE ${this.table}
+      FROM ${this.table}
+      LEFT JOIN plant ON plant_id = plant.id
+      LEFT JOIN user ON user.id = plant.user_id
+      WHERE user.id = ? `,
+      [userId]
+    );
+  }
 }
 
 module.exports = FavoriteManager;
