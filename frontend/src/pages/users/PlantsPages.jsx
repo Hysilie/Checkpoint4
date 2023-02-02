@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
 import { useCurrentPlantContext } from "../../contexts/plantContext";
@@ -6,7 +6,11 @@ import { useCurrentPlantContext } from "../../contexts/plantContext";
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function PlantsPages() {
-  const { allPlants } = useCurrentPlantContext();
+  const { allPlants, getAllPlants } = useCurrentPlantContext();
+
+  useEffect(() => {
+    getAllPlants();
+  }, []);
 
   return (
     <section className="h-[80vh]">
