@@ -143,7 +143,9 @@ function NavigationBar() {
             </>
           )}
 
-          <li className="hover:scale-110 duration-150">ABOUT US</li>
+          <li className="hover:scale-110 duration-150">
+            <Link to="/aboutus">ABOUT US</Link>
+          </li>
         </ul>
       </section>
     </nav>
