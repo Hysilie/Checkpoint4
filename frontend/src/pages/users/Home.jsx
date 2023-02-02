@@ -1,7 +1,11 @@
-import AnimationHome from "@components/AnimationHome";
-import Footer from "@components/Footer";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+/* Components */
+import AnimationHome from "@components/AnimationHome";
+import Footer from "@components/Footer";
+
+/* Hooks, contexts and .env */
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
@@ -78,8 +82,7 @@ export default function Home() {
             ))}
           </ul>
         </section>
-        {/*         <div className="flex justify-center mx-auto border-b-[1px] lg:border-b-[2px] border-main-dark w-11/12" />
-         */}
+
         {/*  */}
         <AnimationHome />
 

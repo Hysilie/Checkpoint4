@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
-import { useCurrentUserContext } from "../../contexts/userContext";
+import DeleteModaleUser from "@components/DeleteModaleUser";
+
+/* Styles and images */
 import trash from "../../assets/icons/trash.svg";
-import DeleteModaleUser from "../../components/DeleteModaleUser";
 import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
+
+/* Hooks, contexts and .env */
+import { useCurrentUserContext } from "../../contexts/userContext";
 import { useCurrentPlantContext } from "../../contexts/plantContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
@@ -11,8 +17,6 @@ const { VITE_BACKEND_URL } = import.meta.env;
 function UsersManagement() {
   const { token } = useCurrentUserContext();
   const { getAllPlants } = useCurrentPlantContext();
-
-  /* Get all the users */
   const [users, setUsers] = useState([]);
 
   const getUsers = () => {

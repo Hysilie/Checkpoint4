@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
+import Comments from "@components/Comments";
+
+/* Quill */
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
-import Comments from "@components/Comments";
+
+/* Styles and Images */
 import flowers from "@assets/others/flowers.svg";
+
+/* Hooks, contexts and .env */
 import { useCurrentUserContext } from "../../contexts/userContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
@@ -12,10 +20,8 @@ const { VITE_BACKEND_URL } = import.meta.env;
 function Article() {
   const { id } = useParams();
   const { currentUser, token } = useCurrentUserContext();
-
   const [article, setArticle] = useState([]);
   const [comments, setComments] = useState([]);
-
   const [contentArticle, setContentArticle] = useState("");
 
   const handleContentArticle = (content) => {

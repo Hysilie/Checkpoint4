@@ -1,54 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
+import ArticleModale from "@components/ArticleModale";
+
+/* Styles and Images */
 import ReactQuill from "react-quill";
+import { Toaster } from "react-hot-toast";
+import flowers from "../../assets/others/flowers.svg";
+
+/* Quill */
 import "react-quill/dist/quill.snow.css";
 import "react-quill/dist/quill.bubble.css";
-import { toast, Toaster } from "react-hot-toast";
-import ArticleModale from "@components/ArticleModale";
+import quillConfig from "../../config/quillConfig";
+
+/* Hooks, contexts and .env */
+import { useNotifications } from "../../hooks/useNotifications";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import { useCurrentArticleContext } from "../../contexts/articleContext";
-import quillConfig from "../../config/quillConfig";
-import flowers from "../../assets/others/flowers.svg";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function ArticleCreation() {
-  const notifyCreate = () =>
-    toast.success("Article created", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const notifyError = () =>
-    toast.error("Article not created, it must contain 200 characters min.", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
   const navigate = useNavigate();
+
+  const { notifyCreate, notifyArticleError } = useNotifications();
   const { currentUser, token } = useCurrentUserContext();
   const { allArticles, setAllArticles } = useCurrentArticleContext();
 
@@ -64,7 +41,7 @@ function ArticleCreation() {
     e.preventDefault();
 
     if (articleContentQuill.length < 200) {
-      notifyError();
+      notifyArticleError();
       return;
     }
 

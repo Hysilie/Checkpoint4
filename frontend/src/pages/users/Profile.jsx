@@ -1,25 +1,34 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+/* Components */
 import previousBtn from "@assets/icons/FramereturnArrow.svg";
 import FavoriteAndPicture from "@components/FavoriteAndPicture";
-import { toast, Toaster } from "react-hot-toast";
+
+/* Styles and Images */
+import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
+
+/* Hooks, contexts, .env */
+import { useNotifications } from "../../hooks/useNotifications";
 import { useCurrentFavoriteContext } from "../../contexts/favoriteContext";
 import { useCurrentUserContext } from "../../contexts/userContext";
-import profilePictureEmpty from "../../assets/others/profilePictureEmpty.svg";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function Profile() {
   const avatarRef = useRef(null);
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser, token } = useCurrentUserContext();
-  const { myFavorites } = useCurrentFavoriteContext();
 
-  const [myPictures, setMyPictures] = useState([1, 2]);
+  const { currentUser, setCurrentUser, token } = useCurrentUserContext();
+  const { myFavorites, getMyFavorites } = useCurrentFavoriteContext();
+  const { notifyChange, notifyError, notifyImage } = useNotifications();
+  const [myPictures, setMyPictures] = useState([]);
   const [userSettings, setUserSettings] = useState({
     username: currentUser?.username,
   });
 
+  /* Handle inputs content */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -28,58 +37,6 @@ function Profile() {
       [name]: value,
     });
   };
-
-  /* Notification */
-  const notifyChange = () =>
-    toast.success(`Changes have been made`, {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const notifyImage = () =>
-    toast.success(`Your profile picture has been uploaded`, {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const notifyError = () =>
-    toast.error("Username is already used", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "red",
-      },
-    });
 
   /* Update the avatar */
   const handleSubmitAvatar = (e) => {
@@ -172,10 +129,11 @@ function Profile() {
 
   useEffect(() => {
     getMyPictures();
+    getMyFavorites();
   }, []);
 
-  /* Pagination */
-  /* Get the current Page and max tutorials to define pages */
+  /* Pagination for both elements */
+  /* Get the current page to define pages */
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPageFavorite, setCurrentPageFavorite] = useState(1);
 
@@ -202,7 +160,6 @@ function Profile() {
   ) {
     pageNumbers.push(i);
   }
-
   const pageNumberFavorite = [];
   for (
     let i = 1;

@@ -1,7 +1,14 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useCurrentUserContext } from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
+
+/* Components */
+import MenuBurgerLink from "./MenuBurgerLink";
+
+/* Style and images */
 import loginIcon from "../assets/icons/Framelogin.svg";
+
+/* Hooks, contexts and .env */
+import { useCurrentUserContext } from "../contexts/userContext";
 
 function BurgerMenu({ open, setOpen }) {
   const navigate = useNavigate();
@@ -22,50 +29,26 @@ function BurgerMenu({ open, setOpen }) {
         onClick={() => setOpen(!open)}
         role="presentation"
       >
-        <li className="hover:scale-110 duration-150">
-          {" "}
-          <Link to="/">
-            HOME <hr />
-          </Link>
-        </li>
-
-        <li className="hover:scale-110 duration-150">
-          <Link to="/articles">ARTICLES</Link> <hr />
-        </li>
-
-        <li className="hover:scale-110 duration-150">
-          <Link to="/plants">PLANTS</Link> <hr />
-        </li>
+        <MenuBurgerLink link="/" text="HOME" />
+        <MenuBurgerLink link="/articles" text="ARTICLES" />
+        <MenuBurgerLink link="/plants" text="PLANTS" />
 
         {/* Registers only */}
         {currentUser.username && (
-          <li>
-            <Link to="/create-plant">ADD PLANT</Link> <hr />
-          </li>
-        )}
-        {currentUser.admin === 1 && (
-          <li className="hover:scale-110 duration-150">
-            <Link to="/create-article">ADD ARTICLE</Link>
-            <hr />
-          </li>
+          <MenuBurgerLink link="/create-plant" text="ADD PLANT" />
         )}
 
         {/* Admins only */}
         {currentUser.admin === 1 && (
           <>
-            <li>
-              <Link to="/users-management">MEMBERS</Link> <hr />
-            </li>
-            <li className="hover:scale-110 duration-150">
-              <Link to="/articles-management">MY ARTICLES</Link>
-              <hr />
-            </li>
+            <MenuBurgerLink link="/create-article" text="ADD ARTICLE" />
+            <MenuBurgerLink link="/users-management" text="MEMBERS" />
+            <MenuBurgerLink link="/articles-management" text="MY ARTICLES" />
           </>
         )}
 
-        <li className="hover:scale-110 duration-150">
-          <Link to="/aboutus">ABOUT US</Link> <hr />
-        </li>
+        <MenuBurgerLink link="/aboutus" text="ABOUT US" />
+
         <button
           type="button"
           onClick={

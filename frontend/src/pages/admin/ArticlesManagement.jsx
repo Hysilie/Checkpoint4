@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
+import DeleteModaleArticle from "../../components/DeleteModaleArticle";
+
+/* Styles and Images */
+import trash from "../../assets/icons/trash.svg";
+
+/* Hooks, contexts and .env */
 import { useCurrentArticleContext } from "../../contexts/articleContext";
 import { useCurrentUserContext } from "../../contexts/userContext";
-import trash from "../../assets/icons/trash.svg";
-import DeleteModaleArticle from "../../components/DeleteModaleArticle";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 

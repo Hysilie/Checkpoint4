@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+
+/* Quill */
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.bubble.css";
 import "react-quill/dist/quill.snow.css";
+
+/* Styles and Images */
 import quillConfig from "../config/quillConfig";
 import trash from "../assets/icons/trash2.svg";
 import edit from "../assets/icons/Frameedit.svg";
+
+/* Hooks, contexts and .env */
 import { useCurrentUserContext } from "../contexts/userContext";
 
 const { VITE_BACKEND_URL } = import.meta.env;
@@ -20,7 +26,6 @@ function Comments({
 }) {
   const { token } = useCurrentUserContext();
   const [id, setId] = useState(null);
-
   const [modifyContent, setModifyContent] = useState(comments.content);
   const handleModifyComment = (currentId) => {
     if (id === null) {
@@ -66,7 +71,7 @@ function Comments({
     <ul className=" flex flex-col m-2 p-2 items-center ">
       {comments?.map((comment, index) => (
         <li
-          key={comment?.id}
+          key={index}
           className={`border-2 border-main-dark bg-main-white w-5/6 my-3 flex flex-col ${
             index % 2 === 0 ? "self-end" : "self-start"
           }`}

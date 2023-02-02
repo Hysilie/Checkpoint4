@@ -109,6 +109,7 @@
 <li>3️⃣ npm run migrate</li>
 <li>🚨 you need to desactivate the safemode of your SQL for the moment</li>
 <li>4️⃣ create .env files /frontend /backend</li>
+<li>4️⃣ you must have to an api key for <a href='https://www.weatherapi.com/' rel="noreferrer" target='_blank' >WeatherApi</a></li>
 </ul>
 
 <br/>

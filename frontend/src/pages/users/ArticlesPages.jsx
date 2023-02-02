@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
+
+/* Hooks, contexts and .env */
 import { useCurrentArticleContext } from "../../contexts/articleContext";
 
 function ArticlesPages() {
   const navigate = useNavigate();
   const { allArticles } = useCurrentArticleContext();
-
-  /* Search Bar */
   const [search, setSearch] = useState("");
+
   /* Make the search "normalized" to match with extended regex */
   const normalizeSearch = search
     ?.toLowerCase()
@@ -24,7 +27,6 @@ function ArticlesPages() {
   );
 
   /* Pagination */
-  /* Get the current Page and max tutorials to define pages */
   const [currentPage, setCurrentPage] = useState(1);
   const articlePerPage = 4;
 

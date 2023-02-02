@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+/* Hooks, context and .env */
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function FavoriteAndPicture({

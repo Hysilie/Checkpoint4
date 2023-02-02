@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+
+/* Style and images */
 import previousBtn from "../assets/icons/FramereturnArrow.svg";
 
 function PreviousBtn() {

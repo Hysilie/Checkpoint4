@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { useCurrentUserContext } from "../contexts/userContext";
+
+/* Components */
+import BurgerMenu from "./BurgerMenu";
+import WeatherWidget from "./WeatherWidget";
+
+/* Style and images */
 import menuBurger from "../assets/icons/FrameburgerMenu.svg";
 import closeMenuBurger from "../assets/icons/FramecloseMenu.svg";
 import loginIcon from "../assets/icons/Framelogin.svg";
 import registerLinkArrow from "../assets/icons/FramearrowRightCorner.svg";
-import BurgerMenu from "./BurgerMenu";
-import WeatherWidget from "./WeatherWidget";
+
+/* Hooks, contexts and .env */
+import { useCurrentUserContext } from "../contexts/userContext";
+import NavigationBarLink from "./NavigationBarLink";
 
 function NavigationBar() {
   const [open, setOpen] = useState(false);
@@ -108,44 +115,28 @@ function NavigationBar() {
       {/* ~~ Second bar ~~ */}
       <section className="hidden lg:block py-4 border-b-2 border-main-dark">
         <ul className="flex justify-evenly">
-          <li className="hover:scale-110 duration-150">
-            {" "}
-            <Link to="/"> HOME</Link>
-          </li>
-          <li className="hover:scale-110 duration-150">
-            <Link to="/articles">ARTICLES</Link>
-          </li>
-          <li className="hover:scale-110 duration-150">
-            <Link to="/plants">PLANTS</Link>
-          </li>
+          <NavigationBarLink link="/" text="HOME" />
+          <NavigationBarLink link="/articles" text="ARTICLES" />
+          <NavigationBarLink link="/plants" text="PLANTS" />
 
           {/* Registers only */}
           {currentUser.username && (
-            <li className="hover:scale-110 duration-150">
-              <Link to="/create-plant">ADD PLANT</Link>
-            </li>
+            <NavigationBarLink link="/create-plant" text="ADD PLANT" />
           )}
 
           {/* Admins only */}
           {currentUser.admin === 1 && (
             <>
-              {" "}
-              <li className="hover:scale-110 duration-150">
-                <Link to="/create-article">ADD ARTICLE</Link>
-              </li>
-              <li className="hover:scale-110 duration-150">
-                {" "}
-                <Link to="/users-management">MEMBERS</Link>
-              </li>
-              <li className="hover:scale-110 duration-150">
-                <Link to="/articles-management">MY ARTICLES</Link>
-              </li>
+              <NavigationBarLink link="/create-article" text="ADD ARTICLE" />
+              <NavigationBarLink link="/users-management" text="MEMBERS" />
+              <NavigationBarLink
+                link="/articles-management"
+                text="MY ARTICLES"
+              />
             </>
           )}
 
-          <li className="hover:scale-110 duration-150">
-            <Link to="/aboutus">ABOUT US</Link>
-          </li>
+          <NavigationBarLink link="/aboutus" text="ABOUT US" />
         </ul>
       </section>
     </nav>
