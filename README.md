@@ -14,16 +14,22 @@
 
 <!-- Objectives -->
 <h1 href='#'>The Objectives</h1>
-<ul> 🪴 Front-End 🪴
+<ul>🪴 Front-End 🪴
+
+<br/>
 <li>🖼️ Make a wireframe</li>
 <li>🖋️ Write user stories</li>
 <li>📐 Responsive Website</li>
 <li>🕺 Dynamic Website (API call) </li>
 </ul>
+<br/>
+<br/>
 
 
 
-<ul> 🪴 Back-End 🪴
+<ul>🪴 Back-End 🪴
+
+<br/>
 <li>📄 Create data & database</li>
 <li>🚦 Components to data'access </li>
 <li>🚏 MVC Schema</li>
@@ -34,36 +40,41 @@
 
 <!-- Technical stack -->
 <h1 href='#'>Technical Stack</h1>
+
 <a href="https://reactjs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/> </a> 
-
 <a href="https://expressjs.com/fr/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/expressjs/expressjs-ar21.svg" alt="express" width="40" height="40"/> </a>
-
-<a href="https://nodejs.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-ar21.svg" alt="Node" width="40" height="40"/> </a> 
-
-  <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> 
-
-<a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a>  </p>
+<a href="https://nodejs.org/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/nodejs/nodejs-ar21.svg" alt="Node" width="40" height="40"/></a> <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" alt="tailwind" width="40" height="40"/> </a> 
+<a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a>  
 <br/>
 <br/>
-  
+  </div>
   <!-- Wirframe -->
 <h1 href='#'>WireFrame</h1>
 <p> Access to the Figma -> <a href='https://www.figma.com/file/kptLDnNaPGwkWqbD9Mwjrb/Plants-for-People?t=LQZRXdUUK6oFO5Z1-1' >Here</a></p>
 
-<p align="center">
-  <img src="https://i.postimg.cc/Y9FG0yWG/Capture-d-e-cran-2023-02-02-a-11-24-41.png" width="350" title="hover text">
-</p>
-<p align="center">
-<img src="https://i.postimg.cc/ZKBgR87k/Capture-d-e-cran-2023-02-02-a-11-26-18.png" alt="Connexion" border="0">
-<img src="https://i.postimg.cc/SNfZjg6v/Capture-d-e-cran-2023-02-02-a-11-27-48.png" alt="Home" border="0">
-<img src="https://i.postimg.cc/pXcF08Rd/Capture-d-e-cran-2023-02-02-a-11-28-36.png" alt="Article" border="0">
-<img src="https://i.postimg.cc/tTrqX3rZ/Capture-d-e-cran-2023-02-02-a-11-29-56.png" alt="Management" border="0">
-<img src="https://i.postimg.cc/s1dty1RG/Capture-d-e-cran-2023-02-02-a-11-30-42.png" alt="Plant" border="0">
-</p>
+
+
+<table align='center'>
+<tr>
+<td><img src="https://i.postimg.cc/Y9FG0yWG/Capture-d-e-cran-2023-02-02-a-11-24-41.png" width=500px title="hover text"></td>
+</tr>
+</table>
+
+<table align="center">
+  <tr>
+    <td valign="top"><img src="https://i.postimg.cc/ZKBgR87k/Capture-d-e-cran-2023-02-02-a-11-26-18.png" width=200px  alt="Connexion" border="0"></td>
+    <td valign="top"><img src="https://i.postimg.cc/SNfZjg6v/Capture-d-e-cran-2023-02-02-a-11-27-48.png" width=200px alt="Home" border="0"></td>
+    <td valign="top"><img src="https://i.postimg.cc/pXcF08Rd/Capture-d-e-cran-2023-02-02-a-11-28-36.png" width=200px alt="Article" border="0"></td>
+    <td valign="top"><img src="https://i.postimg.cc/tTrqX3rZ/Capture-d-e-cran-2023-02-02-a-11-29-56.png" width=200px alt="Management" border="0"></td>
+    
+  </tr>
+</table>
+
 <br/>
 <br/>
 
-<!-- <!-- Features -->
+
+ <!-- Features -->
 <h1 href='#'>Features</h1>
 <ul> 🪴👩‍💼 Visitor : 
 <li>As a visitor, I can access a homepage allowing me to see the content offered by the application. </li>
@@ -89,7 +100,7 @@
 </ul>
 
 <br/>
-<br/> -->
+<br/> 
 <!-- Installation -->
 <h1 href='#'>Installation</h1>
 <ul>
