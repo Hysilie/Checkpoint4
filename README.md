@@ -78,7 +78,7 @@
 
 <table align='center'>
 <tr>
-<td><img src="https://i.postimg.cc/FzwqzBt6/Capture-d-e-cran-2023-02-02-a-16-04-57.png" width=500px title="hover text"></td>
+<td><img src='https://svgshare.com/i/q0U.svg' width=500px alt='Databse' border="0" /></td>
 </tr>
 </table>
 
