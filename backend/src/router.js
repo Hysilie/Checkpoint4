@@ -1,13 +1,124 @@
 const express = require("express");
+/* Multer is used to manage images uploads */
+const multer = require("multer");
+
+const upload = multer({ dest: process.env.PLANTS_DIRECTORY });
 
 const router = express.Router();
 
-const itemControllers = require("./controllers/itemControllers");
+/* ~~  CONTROLLERS REQUIRE ~~  */
+/* We get the authentification service */
+const {
+  hashPassword,
+  verifyPassword,
+  verifyToken,
+} = require("./services/auth");
+const authentificationControllers = require("./controllers/authControllers");
+const userControllers = require("./controllers/userControllers");
+const articleControllers = require("./controllers/articleControllers");
+const plantControllers = require("./controllers/plantControllers");
+const fileControllers = require("./controllers/fileControllers");
+const favoriteControllers = require("./controllers/favoriteControllers");
+const commentControllers = require("./controllers/commentControllers");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
+/* ~~ PUBLIC ROUTES  ~~ */
+/* Register and Login */
+/* Users Management */
+router.post("/register", hashPassword, userControllers.add);
+router.post(
+  "/login",
+  authentificationControllers.getUserByUsernameWithPasswordAndPassToNext,
+  verifyPassword
+);
+
+/* Articles Management */
+router.get("/articles", articleControllers.browse);
+router.get("/articles/:id", articleControllers.read);
+router.get("/articles/user/:id", articleControllers.getByUserId);
+router.get("/articles-latest", articleControllers.latestArticles);
+
+/* Plants Management */
+router.get("/plants", plantControllers.browse);
+router.get("/plants/:id", plantControllers.read);
+router.get("/plants/user/:id", plantControllers.getPlantsbyUser);
+router.get("/plants-latest", plantControllers.latestPlants);
+
+/* Pictures */
+router.get("/pictures/:fileName", fileControllers.upload);
+router.get("/avatars/:fileName", fileControllers.upload);
+
+/* ~~ PROTECTED ~~ */
+/* The middleware will now check if the token exist */
+router.use(verifyToken);
+/* ********** */
+/* Users Management */
+/* ********** */
+router.get("/users", userControllers.browse);
+router.get("/users/:id", userControllers.read);
+router.put("/users/:id", userControllers.edit);
+router.delete("/users/:id", userControllers.destroy);
+/* ********** */
+/* Articles Management */
+/* ********** */
+router.post("/create-article", articleControllers.add);
+router.delete("/articles/:id", articleControllers.destroy);
+router.put("/articles/:id", articleControllers.edit);
+/* ********** */
+/* ********** */
+/* Plants Management */
+/* ********** */
+router.delete("/plants/:id", plantControllers.destroy);
+router.delete("/plants-all-user/:id", plantControllers.destroyAllPlantsByUser);
+/* ********** */
+/* ********** */
+/* Favorite Management */
+/* ********** */
+router.get("/favorites/:id", favoriteControllers.favoriteByUser);
+router.get(
+  "/favorites-all-plant-by-creator/:id",
+  favoriteControllers.getAllFavoritesByPlantCreator
+);
+router.post("/favorites", favoriteControllers.addFavorite);
+router.delete("/favorites", favoriteControllers.deleteFavorite);
+router.delete("/favorites-all", favoriteControllers.deleteAllFavorites);
+router.delete(
+  "/favorites-all-user/:id",
+  favoriteControllers.deleteAllFavoritesByUser
+);
+router.delete(
+  "/favorites-all-plant-by-creator/:id",
+  favoriteControllers.deleteAllFavoritesByPlantCreator
+);
+/* ********** */
+/* ********** */
+/* Comment Management */
+/* ********** */
+router.get("/comments/:id", commentControllers.getByArticleId);
+router.get("/comments-user/:id", commentControllers.getByUserId);
+router.post("/comments", commentControllers.add);
+router.put("/comments/:id", commentControllers.update);
+router.delete("/comments/:id", commentControllers.destroy);
+router.delete("/comments-all", commentControllers.destroyByArticle);
+router.delete("/comments-all-user/:id", commentControllers.destroyByUser);
+/* ********** */
+/* Plants picture management */
+/* ********** */
+router.post(
+  "/pictures",
+  verifyToken,
+  upload.single("picture"),
+  fileControllers.rename,
+  plantControllers.updatePicture
+);
+/* ********** */
+/* ********** */
+/* User picture management  */
+/* ********** */
+router.put(
+  "/avatars",
+  upload.single("profilePicture"),
+  fileControllers.rename,
+  userControllers.updateAvatar
+);
 
 module.exports = router;
