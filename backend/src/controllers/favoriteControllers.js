@@ -105,6 +105,24 @@ const deleteAllFavoritesByPlantCreator = (req, res) => {
     });
 };
 
+/*  get all favorite of a plant linked to a user */
+const getAllFavoritesByPlantCreator = (req, res) => {
+  const userId = req.params.id;
+  models.favorite
+    .getAllFavoritesByPlantCreator(userId)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.sendStatus(404);
+      } else {
+        res.send(result).status(204);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.sendStatus(500);
+    });
+};
+
 module.exports = {
   favoriteByUser,
   addFavorite,
@@ -112,4 +130,5 @@ module.exports = {
   deleteAllFavorites,
   deleteAllFavoritesByUser,
   deleteAllFavoritesByPlantCreator,
+  getAllFavoritesByPlantCreator,
 };

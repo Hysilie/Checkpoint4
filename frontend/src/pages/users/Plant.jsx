@@ -241,6 +241,12 @@ export default function Plant() {
               ""
             )}
           </button>
+
+          {plant.content && (
+            <div className=" flex flex-col mx-3 my-6 w-5/6 border-2 border-main-dark">
+              <p className="h-fit p-3 text-left"> {plant?.content} </p>
+            </div>
+          )}
         </article>
         {/* Content of the article */}
         <aside className="lg:w-1/2 flex md:items-center justify-center px-6 my-6 h-96">

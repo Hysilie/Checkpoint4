@@ -22,6 +22,10 @@
     /* for the use of location.pathname */
     "no-restricted-globals": ["error", "event", "fdescribe"],
     "no-console": "off",
+    "consistent-return": "off",
+    "no-unused-expressions": "off",
+    "no-unsafe-optional-chaining": "off",
+    "no-lone-blocks": "off",
     "no-restricted-syntax": [
       "error",
       {

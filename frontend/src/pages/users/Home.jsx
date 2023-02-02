@@ -84,7 +84,7 @@ export default function Home() {
         <AnimationHome />
 
         {/* Plants section */}
-        <section className="m-8 h-fit mb-[8%]">
+        <section className="m-8 h-fit ">
           <h2 className=" text-xl lg:text-2xl">
             LATEST PLANTS{" "}
             <span className="px-3 text-sm underline">
@@ -104,13 +104,13 @@ export default function Home() {
                     alt={plant.title}
                     className="h-48 w-60 object-cover"
                   />{" "}
-                  <h3 className="font-semibold text-md   w-100 lg:w-72 flex  pr-8">
+                  <h3 className="px-2 font-semibold text-md   w-100 lg:w-72 flex  pr-8">
                     {plant.title
                       ?.toUpperCase()
                       .slice(0, 25)
                       .replace(/.$/, "...")}
                   </h3>
-                  <p>
+                  <p className="px-2">
                     by {plant.username}, the{"  "}
                     {plant.creationDate
                       .slice(0, 10)

@@ -50,24 +50,34 @@ router.get("/avatars/:fileName", fileControllers.upload);
 /* ~~ PROTECTED ~~ */
 /* The middleware will now check if the token exist */
 router.use(verifyToken);
-
+/* ********** */
 /* Users Management */
+/* ********** */
 router.get("/users", userControllers.browse);
 router.get("/users/:id", userControllers.read);
 router.put("/users/:id", userControllers.edit);
 router.delete("/users/:id", userControllers.destroy);
-
+/* ********** */
 /* Articles Management */
+/* ********** */
 router.post("/create-article", articleControllers.add);
 router.delete("/articles/:id", articleControllers.destroy);
 router.put("/articles/:id", articleControllers.edit);
-
+/* ********** */
+/* ********** */
 /* Plants Management */
+/* ********** */
 router.delete("/plants/:id", plantControllers.destroy);
 router.delete("/plants-all-user/:id", plantControllers.destroyAllPlantsByUser);
-
+/* ********** */
+/* ********** */
 /* Favorite Management */
+/* ********** */
 router.get("/favorites/:id", favoriteControllers.favoriteByUser);
+router.get(
+  "/favorites-all-plant-by-creator/:id",
+  favoriteControllers.getAllFavoritesByPlantCreator
+);
 router.post("/favorites", favoriteControllers.addFavorite);
 router.delete("/favorites", favoriteControllers.deleteFavorite);
 router.delete("/favorites-all", favoriteControllers.deleteAllFavorites);
@@ -79,7 +89,10 @@ router.delete(
   "/favorites-all-plant-by-creator/:id",
   favoriteControllers.deleteAllFavoritesByPlantCreator
 );
+/* ********** */
+/* ********** */
 /* Comment Management */
+/* ********** */
 router.get("/comments/:id", commentControllers.getByArticleId);
 router.get("/comments-user/:id", commentControllers.getByUserId);
 router.post("/comments", commentControllers.add);
@@ -87,8 +100,9 @@ router.put("/comments/:id", commentControllers.update);
 router.delete("/comments/:id", commentControllers.destroy);
 router.delete("/comments-all", commentControllers.destroyByArticle);
 router.delete("/comments-all-user/:id", commentControllers.destroyByUser);
-
+/* ********** */
 /* Plants picture management */
+/* ********** */
 router.post(
   "/pictures",
   verifyToken,
@@ -96,8 +110,10 @@ router.post(
   fileControllers.rename,
   plantControllers.updatePicture
 );
-
+/* ********** */
+/* ********** */
 /* User picture management  */
+/* ********** */
 router.put(
   "/avatars",
   upload.single("profilePicture"),

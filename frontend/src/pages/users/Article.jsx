@@ -156,14 +156,15 @@ function Article() {
             {/* Comments */}
           </article>
           {/* Content of the article */}
-          <aside className="lg:w-1/2 px-6 my-6  lg:my-0 lg:h-96 h-fit items-center justify-center">
+          <aside className="lg:w-1/2 px-6 my-6  lg:-my-14 lg:h-96 h-fit items-center justify-center">
             <ReactQuill
               theme="bubble"
               value={article.content}
               className=" h-100  h-fit"
             />
           </aside>
-          <div className=" md:hidden">
+          <div className=" lg:hidden">
+            <div className="border-second-dark border-t-2 w-5/6 flex mx-auto" />
             <Comments
               handleContentArticle={handleContentArticle}
               deleteComment={deleteComment}

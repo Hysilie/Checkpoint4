@@ -16,6 +16,11 @@ function PlantsPages() {
        */}{" "}
       <div className=" flex ">
         <ul className="mx-auto p-6 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+          {allPlants?.length === 0 && (
+            <div className="flex justify-center items-center">
+              <p className="text-2xl text-center">Loading...</p>
+            </div>
+          )}
           {allPlants?.map((plant) => (
             <li
               key={plant.id}
@@ -27,10 +32,10 @@ function PlantsPages() {
                   alt={plant.title}
                   className="h-48 w-60 object-cover"
                 />{" "}
-                <h3 className="font-semibold text-md   w-100 lg:w-72 flex  pr-8">
+                <h3 className="px-2 font-semibold text-md   w-100 lg:w-72 flex  pr-8">
                   {plant.title?.toUpperCase().slice(0, 25).replace(/.$/, "...")}
                 </h3>
-                <p>
+                <p className="px-2">
                   by {plant.username}, the{"  "}
                   {plant.creationDate
                     .slice(0, 10)

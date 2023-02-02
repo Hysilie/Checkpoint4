@@ -96,7 +96,7 @@ const destroyAllPlantsByUser = (req, res) => {
     .deleteAllPlantsByUser(userId)
     .then(([result]) => {
       if (result.affectedRows === 0) {
-        res.sendStatus(404);
+        res.sendsendStatus(404);
       } else {
         res.sendStatus(204);
       }
@@ -118,7 +118,7 @@ const updatePicture = (req, res) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
       } else {
-        res.sendStatus(204);
+        res.send({ picture }).status(204);
       }
     })
     .catch((err) => {

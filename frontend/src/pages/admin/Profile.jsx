@@ -15,9 +15,9 @@ function Profile() {
   const { currentUser, setCurrentUser, token } = useCurrentUserContext();
   const { myFavorites } = useCurrentFavoriteContext();
 
-  const [myPictures, setMyPictures] = useState([]);
+  const [myPictures, setMyPictures] = useState([1, 2]);
   const [userSettings, setUserSettings] = useState({
-    firstname: currentUser.firstname,
+    username: currentUser?.username,
   });
 
   const handleInputChange = (e) => {
@@ -65,7 +65,7 @@ function Profile() {
     });
 
   const notifyError = () =>
-    toast.error("A problem occurred", {
+    toast.error("Username is already used", {
       style: {
         border: "1px solid #eee",
         paddingTop: "16px",
@@ -104,6 +104,7 @@ function Profile() {
           setCurrentUser({
             ...currentUser,
             profilePicture: results.picture,
+            username: userSettings.username,
           });
         })
         .catch((error) => {
@@ -121,7 +122,7 @@ function Profile() {
     myHeaders.append("Content-Type", "application/json");
 
     const body = JSON.stringify({
-      firstname: userSettings.firstname,
+      username: userSettings.username,
       id: currentUser.id,
     });
 
@@ -133,13 +134,14 @@ function Profile() {
     };
 
     fetch(`${VITE_BACKEND_URL}/users/${currentUser.id}`, requestOptions)
-      .then((response) => response.text())
-      .then((results) => {
-        console.warn(results);
+      .then((response) => {
+        if (!response.ok) {
+          return notifyError();
+        }
         notifyChange();
         setCurrentUser({
           ...currentUser,
-          firstname: userSettings.firstname,
+          username: userSettings.username,
         });
       })
       .catch((error) => {
@@ -152,6 +154,7 @@ function Profile() {
   const getMyPictures = () => {
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
+    myHeaders.append("Content-Type", "application/json");
 
     const requestOptions = {
       method: "GET",
@@ -192,7 +195,11 @@ function Profile() {
 
   /* Generate a page by the length */
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(myPictures.length / picturesPerPage); i += 1) {
+  for (
+    let i = 1;
+    i <= Math.ceil(myPictures?.length / picturesPerPage);
+    i += 1
+  ) {
     pageNumbers.push(i);
   }
 
@@ -217,7 +224,7 @@ function Profile() {
         BACK TO HOME
       </button>
       {/* ~~ Favorites and Pictures ~~ */}
-      <aside className="hidden lg:w-1/2 px-3 h-full lg:flex items-center">
+      <aside className="hidden lg:w-2/4 px-3 h-full lg:flex items-center">
         <FavoriteAndPicture
           indexOfLastPicture={indexOfLastPicture}
           indexOfLastFavorite={indexOfLastFavorite}
@@ -238,7 +245,7 @@ function Profile() {
       <section className="w-full h-full mt-[10%] md:mt-0 lg:w-1/2 flex flex-col justify-center items-center ">
         <h2 className="text-3xl  font-serif">My Profile</h2>
         <h3 className="text-xl font-serif mb-8">
-          Hello, {currentUser.firstname}{" "}
+          Hello, {currentUser.firstname} @ {currentUser.username}{" "}
         </h3>
         {/* Image */}
         <form encType="multipart/form-data" className="mt-8">
@@ -268,16 +275,18 @@ function Profile() {
         </form>
         {/* Informations */}
 
-        <form className="mt-8 mb-8 w-6/12" onSubmit={submitUpdate}>
+        <div className="mt-8 mb-8 w-6/12">
           <article className="flex gap-6 mb-8">
             <label htmlFor="firstname" className="text-xl w-28">
-              Firstname
+              Username
             </label>
             <input
               onChange={handleInputChange}
-              name="firstname"
-              id="firstname"
-              placeholder={currentUser.firstname}
+              name="username"
+              id="username"
+              pattern="[a-zA-Z-]+"
+              minLength="3"
+              placeholder={currentUser.username}
               type="text"
               required
               className="bg-main-white w-10/12 focus:ring-0 border-b-2 border-main-dark opacity-60"
@@ -285,14 +294,15 @@ function Profile() {
           </article>
           <div className="flex justify-center mt-8">
             <button
-              type="submit"
+              type="button"
+              onClick={submitUpdate}
               className="mt-8 text-md  h-12 shadow-md text-center border-2 rounded-lg text-main-white bg-main-dark  w-20 hover:scale-110 duration-300"
             >
               {" "}
               SAVE{" "}
             </button>
           </div>
-        </form>
+        </div>
       </section>
 
       <aside className=" lg:hidden px-3   items-center">
@@ -300,11 +310,17 @@ function Profile() {
 
         <FavoriteAndPicture
           indexOfLastPicture={indexOfLastPicture}
+          indexOfLastFavorite={indexOfLastFavorite}
           indexOfFirstPicture={indexOfFirstPicture}
+          indexOfFirstFavorite={indexOfFirstFavorite}
           pageNumbers={pageNumbers}
+          pageNumberFavorite={pageNumberFavorite}
           currentPage={currentPage}
+          currentPageFavorite={currentPageFavorite}
           myPictures={myPictures}
           handlePageChange={handlePageChange}
+          handlePageChangeFavorite={handlePageChangeFavorite}
+          myFavorites={myFavorites}
         />
       </aside>
     </main>

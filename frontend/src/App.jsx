@@ -15,6 +15,7 @@ import ArticlesManagement from "@pages/admin/ArticlesManagement";
 import UsersManagement from "@pages/admin/UsersManagement";
 import Error from "@pages/users/Error";
 import Profile from "@pages/admin/Profile";
+import AboutUs from "@pages/users/AboutUs";
 import Home from "./pages/users/Home";
 import { useCurrentUserContext } from "./contexts/userContext";
 
@@ -59,6 +60,7 @@ function App() {
 
         <Route path="/articles" element={<ArticlesPages />} />
         <Route path="/plants" element={<PlantsPages />} />
+        <Route path="/aboutus" element={<AboutUs />} />
 
         {/* ~~ Registers routes ~~ */}
         {currentUser?.username && (

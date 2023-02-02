@@ -31,6 +31,23 @@ function ArticleCreation() {
       },
     });
 
+  const notifyError = () =>
+    toast.error("Article not created, it must contain 200 characters min.", {
+      style: {
+        border: "1px solid #eee",
+        paddingTop: "16px",
+        paddingBottom: "16px",
+        paddingLeft: "40px",
+        paddingRight: "40px",
+        color: "#eee",
+        backgroundColor: "#333",
+      },
+      iconTheme: {
+        primary: "#eee",
+        secondary: "#333",
+      },
+    });
+
   const navigate = useNavigate();
   const { currentUser, token } = useCurrentUserContext();
   const { allArticles, setAllArticles } = useCurrentArticleContext();
@@ -42,10 +59,14 @@ function ArticleCreation() {
     setArticleTitle(e.target.value);
   };
   const [articleContentQuill, setArticleContentQuill] = useState("");
-
   /* Create the article */
   const handleSubmitArticle = async (e) => {
     e.preventDefault();
+
+    if (articleContentQuill.length < 200) {
+      notifyError();
+      return;
+    }
 
     const body = JSON.stringify({
       title: articleTitle,
@@ -110,6 +131,7 @@ function ArticleCreation() {
             by {currentUser.username}, the{" "}
             {Date().slice(0, 10).split("-").reverse().join("/")}
           </p>
+
           <img
             src={flowers}
             alt="flowers"
@@ -122,12 +144,13 @@ function ArticleCreation() {
             theme="snow"
             value={articleContentQuill}
             onChange={setArticleContentQuill}
+            placeholder=" The article must contain min. 200 characters"
             modules={quillConfig.modules}
             className=" h-60 lg:h-96"
           />
         </aside>
         {/* Buttons */}
-        <div className="lg:absolute lg:bottom-60 flex w-full lg:w-1/2 justify-center  lg:justify-start gap-10 px-3">
+        <div className=" relative lg:absolute lg:bottom-60 flex w-full lg:w-1/2 justify-center  lg:justify-start gap-10 px-3">
           <button
             type="button"
             onClick={() => {
@@ -135,11 +158,16 @@ function ArticleCreation() {
             }}
             className=" text-sm h-12 shadow-md text-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300"
           >
-            PREVIOUS
+            PREVIEW
           </button>
+
           <button
             type="submit"
-            className=" text-sm font-semibold h-12 shadow-md text-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300"
+            className={`${
+              articleContentQuill.length < 200 &&
+              " opacity-40 hover:scale-100 cursor-not-allowed"
+            }
+            }   text-sm font-semibold h-12 shadow-md text-center border-2 rounded-lg border-main-dark opacity-70 w-20 hover:scale-110 duration-300`}
           >
             PUBLISH
           </button>

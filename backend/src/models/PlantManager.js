@@ -49,8 +49,8 @@ class PlantManager extends AbstractManager {
   /* Add a plant */
   insert(plant, picture) {
     return this.connection.query(
-      `insert into ${this.table} (title, picture,user_id) values (?, ?, ?)`,
-      [plant.title, picture, plant.user_id]
+      `insert into ${this.table} (title, picture,user_id,content) values (?, ?, ?, ?)`,
+      [plant.title, picture, plant.user_id, plant.content]
     );
   }
 
