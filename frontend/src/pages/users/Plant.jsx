@@ -1,64 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
+import DeleteModalePlant from "@components/DeleteModalePlant";
+
+/* Styles and Images */
 import fav from "@assets/icons/Framefav.svg";
 import nofav from "@assets/icons/Framenofav.svg";
 import trash from "@assets/icons/trash2.svg";
-import DeleteModalePlant from "@components/DeleteModalePlant";
-import { toast, Toaster } from "react-hot-toast";
+
+/* Hooks, contexts and .env */
+import { Toaster } from "react-hot-toast";
 import { useCurrentUserContext } from "../../contexts/userContext";
 import { useCurrentFavoriteContext } from "../../contexts/favoriteContext";
 import { useCurrentPlantContext } from "../../contexts/plantContext";
+import { useNotifications } from "../../hooks/useNotifications";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 export default function Plant() {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const { notifyDeleteSucess, notifyPlantError } = useNotifications();
   const { myFavorites, setMyFavorites, getMyFavorites } =
     useCurrentFavoriteContext();
   const { getAllPlants } = useCurrentPlantContext();
   const { currentUser, token } = useCurrentUserContext();
-  const { id } = useParams();
-
-  /* Notifications */
-  const notifyDeleteSucess = () =>
-    toast.success(`Your publication has been delete`, {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const notifyError = () =>
-    toast.error("A problem occurred", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "red",
-      },
-    });
 
   /* Get the plant by ID */
   const [plant, setPlant] = useState([]);
   const plantID = parseInt(id, 10);
-  /* Get the article by his id, get by params */
+
   useEffect(() => {
     const getPlant = () => {
       fetch(`${VITE_BACKEND_URL}/plants/${id}`)
@@ -78,7 +51,6 @@ export default function Plant() {
     myFavorites?.some((myfavorite) => myfavorite.plant_id === plantID);
 
   const [favorite, setFavorite] = useState(checkTheStatus);
-
   const addFavorite = () => {
     const checkFavorite = myFavorites?.some(
       (myfavorite) => myfavorite.plant_id === plantID
@@ -167,7 +139,7 @@ export default function Plant() {
       })
       .catch((error) => {
         console.warn(error);
-        notifyError();
+        notifyPlantError();
       });
 
     /* Delete the plant by ID */
@@ -190,7 +162,7 @@ export default function Plant() {
       })
       .catch((error) => {
         console.warn(error);
-        notifyError();
+        notifyPlantError();
       });
   };
 

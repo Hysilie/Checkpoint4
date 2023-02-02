@@ -3,11 +3,15 @@ import { Link } from "react-router-dom";
 import PreviousBtn from "@components/PreviousBtn";
 import { useCurrentPlantContext } from "../../contexts/plantContext";
 
+/* Components */
+
+/*  Hooks, contexts, .env */
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function PlantsPages() {
   const { allPlants, getAllPlants } = useCurrentPlantContext();
 
+  /* Get all plants */
   useEffect(() => {
     getAllPlants();
   }, []);

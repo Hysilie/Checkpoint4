@@ -1,62 +1,33 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
-import { toast, Toaster } from "react-hot-toast";
 import plantUpload from "../../assets/others/plantUpload.jpg";
+
+/* Hooks, contexts and .env */
 import { useCurrentUserContext } from "../../contexts/userContext";
+import { useNotifications } from "../../hooks/useNotifications";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function PlantCreation() {
-  const notifyPost = () =>
-    toast.success("Plant picture added", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const notifyError = () =>
-    toast.error("Picture not published, you must add a title.", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const navigate = useNavigate();
-  const { currentUser, token } = useCurrentUserContext();
-  const userID = currentUser.id;
-
-  /* Get contents of the post */
   const [plantTitle, setPlantTitle] = useState("");
   const [plantImg, setPlantImg] = useState(null);
   const [plantContent, setPlantContent] = useState("");
 
+  const { notifyPost, notifyPostError } = useNotifications();
+  const { currentUser, token } = useCurrentUserContext();
+
   /* Image Upload */
   const plantPicture = useRef(null);
-
+  const navigate = useNavigate();
+  const userID = currentUser.id;
+  /* Submit Picture with Post Method */
   const handleSubmitPicture = (e) => {
     if (plantTitle.length <= 10) {
-      return notifyError();
+      return notifyPostError();
     }
     e.preventDefault();
     if (plantPicture.current.files[0]) {
@@ -91,7 +62,7 @@ function PlantCreation() {
     }
   };
 
-  /* Post a plant */
+  /* Post the plant */
   const handleSubmitPlant = (e) => {
     e.preventDefault();
     notifyPost();

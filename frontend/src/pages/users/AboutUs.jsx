@@ -1,5 +1,9 @@
 import React from "react";
+
+/* Components */
 import PreviousBtn from "@components/PreviousBtn";
+
+/* Styles and Images */
 import flowers from "../../assets/others/flowers.svg";
 
 function AboutUs() {

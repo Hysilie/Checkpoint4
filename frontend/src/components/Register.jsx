@@ -1,46 +1,18 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { toast, Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+
+/* Styles and Images */
 import flowers from "../assets/others/flowers.svg";
+
+/* Hooks, contexts and .env */
+import { useNotifications } from "../hooks/useNotifications";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function Register() {
-  const notifyRegister = () =>
-    toast.success("Your account has been created", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "#333",
-      },
-    });
-
-  const notifyErrorRegister = () =>
-    toast.error("A problem occurred", {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "red",
-      },
-    });
-
   const navigate = useNavigate();
+  const { notifyRegister, notifyErrorRegister } = useNotifications();
   /* Get the user informations to send to the body of the fetch */
   const [userRegisterInformations, setUserRegisterInformations] = useState({
     username: "",

@@ -1,4 +1,6 @@
 import React from "react";
+
+/* Styles and images */
 import flowers from "@assets/others/flowers.svg";
 
 function Error() {

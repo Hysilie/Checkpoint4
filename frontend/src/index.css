@@ -6,13 +6,11 @@ html {
   background-color: #eee;
 }
 
+/* Parameters for React Quill package  */
 p {
   font-size: 1rem;
 }
 
-/* .ql-toolbar.ql-snow {
-  border: 1px solid #333}
- */
 .quill .ql-toolbar.ql-snow {
   border: 2px solid #333;
   box-sizing: border-box;

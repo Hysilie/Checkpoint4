@@ -1,22 +1,31 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 
+/* Styles and images */
 import "./index.css";
-import ArticleCreation from "@pages/admin/ArticleCreation";
-import NavigationBar from "@components/NavigationBar";
-import Login from "@components/Login";
-import Register from "@components/Register";
 import flowersForHome from "@assets/others/flowersForhome.svg";
-import ArticlesPages from "@pages/users/ArticlesPages";
+
+/* For All pages */
+import Home from "@pages/users/Home";
+import Login from "@components/Login";
+import NavigationBar from "@components/NavigationBar";
+import Register from "@components/Register";
+import AboutUs from "@pages/users/AboutUs";
+import Error from "@pages/users/Error";
+
+/* Users pages */
 import Article from "@pages/users/Article";
-import PlantCreation from "@pages/users/PlantCreation";
+import ArticlesPages from "@pages/users/ArticlesPages";
 import Plant from "@pages/users/Plant";
+import PlantCreation from "@pages/users/PlantCreation";
 import PlantsPages from "@pages/users/PlantsPages";
+import Profile from "@pages/users/Profile";
+
+/* Admin pages */
+import ArticleCreation from "@pages/admin/ArticleCreation";
 import ArticlesManagement from "@pages/admin/ArticlesManagement";
 import UsersManagement from "@pages/admin/UsersManagement";
-import Error from "@pages/users/Error";
-import Profile from "@pages/admin/Profile";
-import AboutUs from "@pages/users/AboutUs";
-import Home from "./pages/users/Home";
+
+/* Context */
 import { useCurrentUserContext } from "./contexts/userContext";
 
 function App() {
@@ -26,11 +35,11 @@ function App() {
   return (
     <div>
       {/*  ~~ Main Elements of the website ~~ */}
+      {/* ~~ Home Page for register or login ~~ */}
       <div>
         {location.pathname === "/login" || location.pathname === "/register" ? (
           <main className="border bg-main-white h-screen flex ">
             <aside className="hidden h-full lg:flex items-center grow-0">
-              {/* ~~ Home Page for register or login ~~ */}
               <img
                 src={flowersForHome}
                 alt="Flowers to introduce Plants"
@@ -51,7 +60,7 @@ function App() {
         )}
       </div>
 
-      {/* ~~ Routes ~~ */}
+      {/* ~~ Routes  for all ~~ */}
       <Routes>
         <Route path="*" element={<Error />} />
         <Route path="/" element={<Home />} />
@@ -62,7 +71,7 @@ function App() {
         <Route path="/plants" element={<PlantsPages />} />
         <Route path="/aboutus" element={<AboutUs />} />
 
-        {/* ~~ Registers routes ~~ */}
+        {/* ~~ Routes accessible for members and admins ~~ */}
         {currentUser?.username && (
           <>
             <Route path="/create-plant" element={<PlantCreation />} />
@@ -71,7 +80,7 @@ function App() {
             <Route path="/profile" />
           </>
         )}
-        {/* ~~ Admin routes ~~ */}
+        {/* ~~ Routes for admins ~~ */}
         {currentUser?.admin === 1 && (
           <>
             <Route path="/create-article" element={<ArticleCreation />} />

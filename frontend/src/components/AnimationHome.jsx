@@ -1,4 +1,6 @@
 import React from "react";
+
+/* Flowers */
 import flower1 from "../assets/others/flowerBanner1.svg";
 import flower2 from "../assets/others/flowerbanner2.svg";
 

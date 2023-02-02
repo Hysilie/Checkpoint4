@@ -1,30 +1,24 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { toast, Toaster } from "react-hot-toast";
-import { useCurrentUserContext } from "../contexts/userContext";
+
+/* Styles and Images */
 import flowers from "../assets/others/flowers.svg";
+
+/* Hooks, contexts and .env */
+import { useCurrentUserContext } from "../contexts/userContext";
+import { useNotifications } from "../hooks/useNotifications";
 
 const { VITE_BACKEND_URL } = import.meta.env;
 
 function Login() {
   const navigate = useNavigate();
+  const { notifyErrorConnexion } = useNotifications();
   const { setCurrentUser, setToken } = useCurrentUserContext();
-
-  /* Get the user informations to send to the body of the fetch */
   const [userLoginInformations, setUserLoginInformations] = useState({
     username: "",
     password: "",
   });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setUserLoginInformations({
-      ...userLoginInformations,
-      [name]: value,
-    });
-  };
-
   const notifyConnexion = () =>
     toast.success(`Welcome ${userLoginInformations.username}`, {
       style: {
@@ -42,22 +36,14 @@ function Login() {
       },
     });
 
-  const notifyErrorConnexion = () =>
-    toast.error(`Informations incorrect`, {
-      style: {
-        border: "1px solid #eee",
-        paddingTop: "16px",
-        paddingBottom: "16px",
-        paddingLeft: "40px",
-        paddingRight: "40px",
-        color: "#eee",
-        backgroundColor: "#333",
-      },
-      iconTheme: {
-        primary: "#eee",
-        secondary: "red",
-      },
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    setUserLoginInformations({
+      ...userLoginInformations,
+      [name]: value,
     });
+  };
 
   /* Fetch user's informations to login */
   const handleSubmitLogin = (e) => {
